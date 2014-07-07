@@ -22,7 +22,7 @@ public class Job {
     private Date dateCreated;
 
     @ManyToOne
-    @JoinColumn(name="customer")
+    @JoinColumn(name="jobs")
     private Customer customer;
 
     @OneToMany(cascade=CascadeType.ALL)
@@ -39,7 +39,7 @@ public class Job {
                 "<li><a href=\"/view/customer/%d\">%s</a></li>" +
                 "<li class=\"active\">Job %d</li>" +
             "</ol>",
-            customer.getId(), customer.getCompany(),
+            getCustomer().getId(), getCustomer().getCompany(),
             id);
     }
 

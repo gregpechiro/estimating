@@ -23,7 +23,7 @@ public class CustomerController {
     // list get
     @RequestMapping(value = "/list/customer", method = RequestMethod.GET)
     public String list(Model model, @RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order) {
-        model.addAttribute("customer", customerService.findAllSorted(sort, order));
+        model.addAttribute("customers", customerService.findAllSorted(sort, order));
         return "customer/list";
     }
 
@@ -38,7 +38,7 @@ public class CustomerController {
     @RequestMapping(value = "/add/customer", method = RequestMethod.POST)
     public String add(Customer customer) {
         customerService.insert(customer);
-        return "redirect:/add/customer?added";
+        return "redirect:/list/customer";
     }
 
     // view get
@@ -52,7 +52,7 @@ public class CustomerController {
     @RequestMapping(value = "/del/customer/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable("id") Long id, Model model) {
         customerService.delete(customerService.findById(id));
-        return "redirect:/list/customer?removed";
+        return "redirect:/list/customer";
     }
 
     // edit get
@@ -70,6 +70,6 @@ public class CustomerController {
 	     *  Implement edit/update
 	     */
 
-        return "redirect:/edit/customer/" + id + "?status";
+        return "redirect:/list/customer";
     }
 }

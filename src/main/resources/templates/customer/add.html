@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head id="head">
-		<title>estimating|edit</title>
+		<title>estimating|add</title>
 		<meta charset="utf-8"/>	
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta name="description" content=""/>
@@ -24,12 +24,12 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Edit Job</a>
+					<a class="navbar-brand" href="#">Add Customer</a>
 				</div>
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="/list/customer">Customers</a>
+							<a href="/list/customer">All Customers</a>
 						</li>
 						<li>
 							<a href="/list/job">All Jobs</a>
@@ -38,27 +38,32 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- edit job form -->
-		<div id="editJobDiv" class="col-sm-offset-4 col-sm-4" >
-			<div class="panel panel-default">
-				<div class="panel-heading">Edit Job</div>
-				<div class="panel-body">
-					<form id="editJobForm" role="form" method="post" action="/edit/job/${job.id}">
-						<div class="form-group">
-							<input type="text" id="name" name="name" class="form-control"
-								   placeholder="Job Name" required="true" value="${job.name}"/>
-						</div>
-						<div class="form-group">
-							<input type="email" id="email" name="email" class="form-control"
-								   placeholder="email" required="true" value="${job.email}"/>
-						</div>
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-						<button class="btn btn-md btn-success btn-block" type="submit">Save Job</button>
-						<a href="/list/job" id="cancel" class="btn btn-default btn-block">Cancel</a>
-					</form>
-				</div>
-			</div>
+		
+		<div id="content" class="container">
+		    <div id="addCustomerFormDiv" class="col-sm-offset-4 col-sm-4" >
+		        <div id="addCustomerFormPanel" class="panel panel-default">
+		        	<div class="panel-heading">Add Customer</div>
+		        	<div class="panel-body">
+		        		<form id="addCustomer" role="form" method="post" action="/add/customer">
+		        		    <div class="form-group">
+		        		        <input type="text" id="company" name="company" class="form-control"
+		        		        placeholder="Company" required="true"/>
+		        		    </div>
+		        		    <div class="form-group">
+		        		        <input type="text" id="contact" name="contact" class="form-control"
+		        		            placeholder="Contact" required="true"/>
+		        		    </div>
+		        		    <div class="form-group">
+		        		        <input type="email" id="email" name="email" class="form-control"
+		        		            placeholder="Email" required="true"/>
+		        		    </div>
+		        		    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		        		    <button class="btn btn-md btn-primary btn-block" type="submit">Add Customer</button>
+							<a href="/list/customer" id="cancel" class="btn btn-default btn-block">Cancel</a>
+		        		</form>
+		        	</div>
+		        </div>
+		    </div>
 		</div>
 
 		<!-- scripts -->
