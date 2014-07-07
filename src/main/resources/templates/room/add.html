@@ -24,38 +24,39 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Add Job</a>
+					<a class="navbar-brand" href="#">Add Room</a>
 				</div>
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="/list/job">All Jobs</a>
+							<a href="/view/job/${job.id}">${job.name}</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 
-		<!-- add job form -->
-		<div id="addJobDiv" class="col-sm-offset-4 col-sm-4" >
-			<div class="panel panel-default">
-				<div class="panel-heading">Add Job</div>
-				<div class="panel-body">
-				    <form id="addJobFomr" role="form" method="post" action="/add/job">
-						<div class="form-group">
-							<input type="text" id="name" name="name" class="form-control"
-								placeholder="Job Name" required="true"/>
-						</div>
-						<div class="form-group">
-						    <input type="email" id="email" name="email" class="form-control"
-						        placeholder="email" required="true"/>
-						</div>
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-						<button class="btn btn-md btn-success btn-block" type="submit">Add Job</button>
-						<a href="/list/job" id="cancel" class="btn btn-default btn-block">Cancel</a>
-					</form>
-				</div>
-			</div>
+		<div id="content" class="container">
+		    <div id="addRoomDiv" class="col-sm-offset-4 col-sm-4" >
+		        <div class="panel panel-default">
+		        	<div class="panel-heading">Add Room</div>
+		        	<div class="panel-body">
+		        	    <form id="addRoomForm" role="form" method="post" action="/add/room">
+		        			<div class="form-group">
+		        				<input type="text" id="name" name="name" class="form-control"
+		        					placeholder="Name" required="true"/>
+		        			</div>
+							<div class="form-group">
+							    <input type="text" id="jobId" name="jobId" class="form-control"
+							        placeholder="" required="true" hidden="true" value="${job.id}"/>
+							</div>
+		        			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		        			<button class="btn btn-md btn-success btn-block" type="submit">Add Room</button>
+							<a href="/view/job/${job.id}" id="cancel" class="btn btn-default btn-block">Cancel</a>
+		        		</form>
+		        	</div>
+		        </div>
+		    </div>
 		</div>
 
 		<!-- scripts -->

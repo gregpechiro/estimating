@@ -23,7 +23,7 @@ public class JobController {
     // list get
     @RequestMapping(value = "/list/job", method = RequestMethod.GET)
     public String list(Model model, @RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order) {
-        model.addAttribute("job", jobService.findAllSorted(sort, order));
+        model.addAttribute("jobs", jobService.findAllSorted(sort, order));
         return "job/list";
     }
 

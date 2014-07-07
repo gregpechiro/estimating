@@ -28,6 +28,9 @@
 				</div>
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="/add/job">Add Job</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -38,14 +41,46 @@
 		        <div id="jobsTablePanel" class="panel panel-default">
 		        	<div class="panel-heading">Jobs</div>
 		        	<div class="panel-body">
-		        		
+		        		<div id="jobs" class="table-responsive">
+		        			 <table class="table table-striped">
+		        				<thead>
+		        					<tr>
+		        						<th>Namw</th>
+		        						<th>extra</th>
+		        						<th>Options</th>
+		        					</tr>
+		        				</thead>
+		        				<tbody>
+									<#list jobs as job>
+										<tr>
+											<td>${job.name}</td>
+											<td></td>
+											<td>
+												<#list jobs as job>
+													<form method="post" action="/del/job/${job.id}">
+														<a class="btn btn-default btn-xs" href="/view/job/${job.id}">
+															<i class="fa fa-eye"></i>
+														</a>
+														<a class="btn btn-default btn-xs" href="/edit/job/${job.id}">
+															<i class="fa fa-edit"></i>
+														</a>
+														<input type="hidden" name="${_csrf.parameterName}"
+															   value="${_csrf.token}"/>
+														<button class="btn btn-default btn-xs" type="submit">
+															<i class="fa fa-trash-o"></i>
+														</button>
+													</form>
+												</#list>
+											</td>
+										</tr>
+									</#list>
+		        				</tbody>
+		        			</table>	
+		        		</div>
 		        	</div>
 		        </div>
 		    </div>
 		</div>
-		
-		
-		
 
 		<!-- scripts -->
 		<div id="scripts">
