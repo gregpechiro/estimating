@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller(value = "adminCustomerController")
 @RequestMapping("/admin")
-public class AdminCustomerController {
+public class CustomerController {
 
     @Autowired
     private CustomerService customerService;

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller(value = "adminRoomController")
 @RequestMapping("/admin")
-public class AdminRoomController {
+public class RoomController {
 
     @Autowired
     private RoomService roomService;
