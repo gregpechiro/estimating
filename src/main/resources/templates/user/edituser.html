@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="head">
+
+    itle>My Account</title>
+    eta charset="utf-8"/>
+
+    ta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    < ta name="description" content="edit user username"/>
+    < ta name="author" content="scott cagno"/>
+    < -[if lt IE 9]>
+    <sc
+            ript src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><
+    ![endif]-- >
+
+    href = "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+    rel = "stylesheet" / >
+            < li
+    href = "//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+    rel = "stylesheet" / >
+            < l
+    ref = "http://fonts.googleapis.com/css?family=Raleway"
+    rel = "stylesheet"
+    type = "text/css" / >
+            < link
+    ref = "/static/css/custom.css"
+    rel = "stylesheet"
+    type = "text/css" / >
+
+            <
+    /
+    head
+
+    < body
+    d = "body" >
+            <
+    #
+    it
+    "/main/message.html"
+    as
+    msg >
+        <!--     vbar -->
+    < div
+    navbar
+    " class="
+    navbar
+    navbar -
+    default
+    navbar - static - top
+    navbar - inverse
+    ">
+    < div
+    c
+    s = "container" >
+            < div
+    s = "navbar-header" >
+            < but
+    ype = "button"
+    class
+    = "navbar-toggle"
+    data - toggle = "collapse"
+    data - target = ".navbar-collapse" >
+            < sp
+    ss = "sr-only" > Toggle
+    navigation <
+    /
+    span >
+    < sp
+    ss = "icon-bar" > <
+    /
+    span >
+    < sp
+    ss = "icon-bar" > <
+    /
+    span >
+    < sp
+    ss = "icon-bar" > <
+    /
+    span >
+    <
+    /
+    bu
+    < a
+    c
+    "navbar-brand"
+    href = "#" > Change
+    Username <
+    /
+    a >
+    <
+    /
+    div < div
+    s = "collapse navbar-collapse navbar-ex1-collapse" >
+            < ul = "nav navbar-nav navbar-right" >
+            < li < a / user
+    ">Home</a>
+    < /l                    			<li                    			<a                        /
+    logout
+    ">Logout</a>
+    < /l                    		</
+    ul < /div            	</
+    div > <
+    /
+    div >
+        <!-- co    ent -->
+    < div
+    id
+    content
+    " class="
+    container
+    ">
+    < div
+    c
+    s = "col-sm-offset-4 col-sm-4" >
+            < div
+    s = "panel panel-default" >
+            < d
+    s = "panel-heading" > Change
+    Username <
+    /
+    div >
+    < d
+    s = "panel-body" >
+        ${(ms""}
+            < fo
+    e = "form"
+    method = "post"
+    action = "/user/account/username" >
+            < div
+    s = "form-group" >
+            < pe = "text"
+    id = "username"
+    name = "username"
+    class
+    = "form-control"
+    placehol
+    der = "New Username"
+    required = "true" / >
+            < /                                                  <inpupe="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" / >
+            < buttlass = "btn btn-md btn-primary btn-block"
+    type = "submit" > Save <
+    /
+    button >
+    < br / > < a
+    hr / user / account
+    " class="
+    btn
+    btn -
+    default
+    btn - block
+    ">Back</a>
+    < /for  				</ < /div            	</
+    div > <
+    /
+    div >
+        <!-- f
+    -->
+    < div
+    id = "f    ter"
+    class
+    = "container" > <
+    /
+    div >
+
+        <!-- scrip     -->
+    < div
+    id = "s    ipts" >
+            < script
+    s
+    "//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" ></script>
+        <script s
+        "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <
+        script
+        s
+        "/static/js/custom.js" ></script>
+        </div>
+
+
+        >
+
+        </htm>
