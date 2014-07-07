@@ -14,7 +14,24 @@
 	</head>
 	<body id="body">
 
-		
+		<div id="content" class="container">
+			<div id="editRoomDiv" class="col-sm-offset-4 col-sm-4" >
+				<div class="panel panel-default">
+					<div class="panel-heading">Edit Room</div>
+					<div class="panel-body">
+						<form id="editRoomForm" role="form" method="post" action="/edit/room/{room.id}">
+							<div class="form-group">
+								<input type="text" id="name" name="name" class="form-control"
+									   placeholder="Name" required="true" value="${room.name}"/>
+							</div>
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							<button class="btn btn-md btn-success btn-block" type="submit">Save Room</button>
+							<a href="/view/job/${job.id}" id="cancel" class="btn btn-default btn-block">Cancel</a>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<!-- scripts -->
 		<div id="scripts">

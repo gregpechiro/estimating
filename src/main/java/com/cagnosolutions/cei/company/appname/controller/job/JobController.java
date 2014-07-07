@@ -38,7 +38,7 @@ public class JobController {
     @RequestMapping(value = "/add/job", method = RequestMethod.POST)
     public String add(Job job) {
         jobService.insert(job);
-        return "redirect:/add/job?added";
+        return "redirect:/list/job";
     }
 
     // view get
@@ -65,11 +65,7 @@ public class JobController {
     // edit post
     @RequestMapping(value = "/edit/job/{id}", method = RequestMethod.POST)
     public String edit(@PathVariable("id") Long id, Job job) {
-    
-	    /*
-	     *  Implement edit/update
-	     */
-
-        return "redirect:/edit/job/" + id + "?status";
+    	jobService.update(job);
+        return "redirect:/list/job";
     }
 }

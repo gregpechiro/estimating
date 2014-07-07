@@ -32,7 +32,7 @@ public class Room {
     }
 
     public String toString() {
-        return "Id: " + id + ", Entity: Room";
+        return "Greg Pechiro / Job #" + job.getId() + " / " + name;
     }
 
     public Long getId() {

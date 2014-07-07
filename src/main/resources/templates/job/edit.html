@@ -14,6 +14,27 @@
 	</head>
 	<body id="body">
 
+		<!-- edit job form -->
+		<div id="editJobDiv" class="col-sm-offset-4 col-sm-4" >
+			<div class="panel panel-default">
+				<div class="panel-heading">Edit Job</div>
+				<div class="panel-body">
+					<form id="editJobForm" role="form" method="post" action="/edit/job/${job.id}">
+						<div class="form-group">
+							<input type="text" id="name" name="name" class="form-control"
+								   placeholder="Job Name" required="true" value="${job.name}"/>
+						</div>
+						<div class="form-group">
+							<input type="email" id="email" name="email" class="form-control"
+								   placeholder="email" required="true" value="${job.email}"/>
+						</div>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+						<button class="btn btn-md btn-success btn-block" type="submit">Save Job</button>
+						<a href="/list/job" id="cancel" class="btn btn-default btn-block">Cancel</a>
+					</form>
+				</div>
+			</div>
+		</div>
 		
 
 		<!-- scripts -->

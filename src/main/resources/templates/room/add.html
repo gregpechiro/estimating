@@ -46,10 +46,7 @@
 		        				<input type="text" id="name" name="name" class="form-control"
 		        					placeholder="Name" required="true"/>
 		        			</div>
-							<div class="form-group">
-							    <input type="text" id="jobId" name="jobId" class="form-control"
-							        placeholder="" required="true" hidden="true" value="${job.id}"/>
-							</div>
+							<input type="hidden" id="jobId" name="jobId" value="${job.id}"/>
 		        			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		        			<button class="btn btn-md btn-success btn-block" type="submit">Add Room</button>
 							<a href="/view/job/${job.id}" id="cancel" class="btn btn-default btn-block">Cancel</a>

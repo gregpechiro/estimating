@@ -4,6 +4,7 @@ package com.cagnosolutions.cei.company.appname.controller.room;
  * Copyright Cagno Solutions. All rights reserved.
  */
 
+import com.cagnosolutions.cei.company.appname.domain.Job;
 import com.cagnosolutions.cei.company.appname.domain.Room;
 import com.cagnosolutions.cei.company.appname.service.JobService;
 import com.cagnosolutions.cei.company.appname.service.RoomService;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Collection;
 
 @Controller(value = "roomController")
 public class RoomController {
@@ -41,9 +44,13 @@ public class RoomController {
 
     // add post
     @RequestMapping(value = "/add/room", method = RequestMethod.POST)
-    public String add(Room room) {
-        roomService.insert(room);
-        return "redirect:/add/room?added";
+    public String add(Room room, @RequestParam(value="jobId") Long jobId) {
+		Job job = jobService.findById(jobId);
+		Collection<Room> rooms = job.getRooms();
+		rooms.add(room);
+		job.setRooms(rooms);
+		jobService.update(job);
+        return "redirect:/view/job/"+job.getId();
     }
 
     // view get
@@ -70,11 +77,7 @@ public class RoomController {
     // edit post
     @RequestMapping(value = "/edit/room/{id}", method = RequestMethod.POST)
     public String edit(@PathVariable("id") Long id, Room room) {
-    
-	    /*
-	     *  Implement edit/update
-	     */
-
-        return "redirect:/edit/room/" + id + "?status";
+  		roomService.update(room);
+        return "redirect:/view/job/" + room.getJob().getId();
     }
 }
