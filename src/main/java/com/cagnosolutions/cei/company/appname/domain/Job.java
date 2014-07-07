@@ -19,6 +19,9 @@ public class Job {
     private String name;
     private String email;
     private Date dateCreated;
+
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="rooms")
     private List<Room> rooms;
     private double jobTotal;
 

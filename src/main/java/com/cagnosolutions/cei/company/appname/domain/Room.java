@@ -16,6 +16,9 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="items")
     private Map<Item, Integer> items;
     private double roomTotal;
     private int labor;
