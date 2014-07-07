@@ -3,7 +3,6 @@ package com.cagnosolutions.cei.company.appname.config;
 import freemarker.template.TemplateException;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.ErrorPage;
-import org.springframework.boot.context.embedded.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -14,7 +13,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
-import javax.servlet.MultipartConfigElement;
 import java.io.IOException;
 
 @Configuration
@@ -58,12 +56,4 @@ public class HttpConfig extends WebMvcConfigurerAdapter {
             container.addErrorPages(error401, error403, error404, error405, error500);
         };
     }
-
-	@Bean
-	public MultipartConfigElement multipartConfigElement() {
-		MultipartConfigFactory factory = new MultipartConfigFactory();
-		factory.setMaxFileSize("4MB");
-		factory.setMaxRequestSize("4MB");
-		return factory.createMultipartConfig();
-	}
 }

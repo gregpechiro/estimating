@@ -1,4 +1,4 @@
-package com.cagnosolutions.cei.company.appname.controller.admin;
+package com.cagnosolutions.cei.company.appname.controller.admin.user;
 
 import com.cagnosolutions.cei.company.appname.domain.User;
 import com.cagnosolutions.cei.company.appname.service.FlashService;
