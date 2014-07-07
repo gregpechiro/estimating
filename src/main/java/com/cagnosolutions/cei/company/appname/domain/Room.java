@@ -6,7 +6,8 @@ package com.cagnosolutions.cei.company.appname.domain;
  */
 
 import javax.persistence.*;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Table(name = "room")
@@ -17,9 +18,13 @@ public class Room {
     private Long id;
     private String name;
 
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="items")
-    private Map<Item, Integer> items;
+	@ManyToOne
+	@JoinColumn(name="rooms")
+	private Job job;
+
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="room_item")
+    private Collection<Item> items = new ArrayList<Item>();
     private double roomTotal;
     private int labor;
 
@@ -46,11 +51,19 @@ public class Room {
         this.name = name;
     }
 
-    public Map<Item, Integer> getItems() {
+	public Job getJob() {
+		return job;
+	}
+
+	public void setJob(Job job) {
+		this.job = job;
+	}
+
+	public Collection<Item> getItems() {
         return items;
     }
 
-    public void setItems(Map<Item, Integer> items) {
+    public void setItems(Collection<Item> items) {
         this.items = items;
     }
 

@@ -6,8 +6,9 @@ package com.cagnosolutions.cei.company.appname.domain;
  */
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "job")
@@ -22,7 +23,7 @@ public class Job {
 
     @OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name="rooms")
-    private List<Room> rooms;
+    private Collection<Room> rooms = new ArrayList<Room>();
     private double jobTotal;
 
     public Job() {
@@ -64,11 +65,11 @@ public class Job {
         this.dateCreated = dateCreated;
     }
 
-    public List<Room> getRooms() {
+    public Collection<Room> getRooms() {
         return rooms;
     }
 
-    public void setRooms(List<Room> rooms) {
+    public void setRooms(Collection<Room> rooms) {
         this.rooms = rooms;
     }
 

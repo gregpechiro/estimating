@@ -5,6 +5,7 @@ package com.cagnosolutions.cei.company.appname.controller.room;
  */
 
 import com.cagnosolutions.cei.company.appname.domain.Room;
+import com.cagnosolutions.cei.company.appname.service.JobService;
 import com.cagnosolutions.cei.company.appname.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ public class RoomController {
     @Autowired
     private RoomService roomService;
 
+	@Autowired
+	private JobService jobService;
+
     // list get
     @RequestMapping(value = "/list/room", method = RequestMethod.GET)
     public String list(Model model, @RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order) {
@@ -28,9 +32,10 @@ public class RoomController {
     }
 
     // add get
-    @RequestMapping(value = "/add/room", method = RequestMethod.GET)
-    public String addForm(Model model) {
+    @RequestMapping(value = "/add/room/{job}", method = RequestMethod.GET)
+    public String addForm(Model model, @PathVariable("job") Long jobId) {
         model.addAttribute("room", new Room());
+		model.addAttribute("job", jobService.findById(jobId));
         return "room/add";
     }
 
