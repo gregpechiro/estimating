@@ -17,9 +17,13 @@ public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
-    private String email;
+    private String description;
+    private String notes;
     private Date dateCreated;
+
+    @ManyToOne
+    @JoinColumn(name="customer")
+    private Customer customer;
 
     @OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name="rooms")
@@ -30,7 +34,13 @@ public class Job {
     }
 
     public String toString() {
-        return "Id: " + id + ", Entity: Job";
+        return String.format(
+            "<ol class=\"breadcrumb\">" +
+                "<li><a href=\"/view/customer/%d\">%s</a></li>" +
+                "<li class=\"active\">Job %d</li>" +
+            "</ol>",
+            customer.getId(), customer.getCompany(),
+            id);
     }
 
     public Long getId() {
@@ -41,20 +51,20 @@ public class Job {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getDescription() {
+        return description;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getEmail() {
-        return email;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public Date getDateCreated() {
@@ -63,6 +73,14 @@ public class Job {
 
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Collection<Room> getRooms() {

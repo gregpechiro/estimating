@@ -17,6 +17,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private String notes;
 
 	@ManyToOne
 	@JoinColumn(name="rooms")
@@ -32,7 +33,15 @@ public class Room {
     }
 
     public String toString() {
-        return "Greg Pechiro / Job #" + job.getId() + " / " + name;
+        return String.format(
+            "<ol class=\"breadcrumb\">" +
+                "<li><a href=\"/view/customer/%d\">%s</a></li>" +
+                "<li><a href=\"/view/job/%d\">Job %d</a></li>" +
+                "<li class=\"active\">%s</li>" +
+            "</ol>",
+            job.getCustomer().getId(), job.getCustomer().getCompany(),
+            job.getId(), job.getId(),
+            name);
     }
 
     public Long getId() {
@@ -51,7 +60,15 @@ public class Room {
         this.name = name;
     }
 
-	public Job getJob() {
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public Job getJob() {
 		return job;
 	}
 
