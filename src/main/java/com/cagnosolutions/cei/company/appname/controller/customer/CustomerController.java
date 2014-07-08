@@ -65,11 +65,11 @@ public class CustomerController {
     // edit post
     @RequestMapping(value = "/edit/customer/{id}", method = RequestMethod.POST)
     public String edit(@PathVariable("id") Long id, Customer customer) {
-    
-	    /*
-	     *  Implement edit/update
-	     */
-
-        return "redirect:/list/customer";
+		Customer existingCustomer = customerService.findById(id);
+    	existingCustomer.setCompany(customer.getCompany());
+		existingCustomer.setContact(customer.getContact());
+		existingCustomer.setEmail(customer.getEmail());
+		customerService.update(existingCustomer);
+        return "redirect:/view/customer/" + id;
     }
 }

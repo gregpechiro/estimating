@@ -29,7 +29,7 @@
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="/add/job">Add Job</a>
+							<a href="/list/customer">Customers</a>
 						</li>
 					</ul>
 				</div>
@@ -58,21 +58,19 @@
 											<td></td>
 											<td>${job.jobTotal}</td>
 											<td>
-												<#list jobs as job>
-													<form method="post" action="/del/job/${job.id}">
-														<a class="btn btn-default btn-xs" href="/view/job/${job.id}">
-															<i class="fa fa-eye"></i>
-														</a>
-														<a class="btn btn-default btn-xs" href="/edit/job/${job.id}">
-															<i class="fa fa-edit"></i>
-														</a>
-														<input type="hidden" name="${_csrf.parameterName}"
-															   value="${_csrf.token}"/>
-														<button class="btn btn-default btn-xs" type="submit">
-															<i class="fa fa-trash-o"></i>
-														</button>
-													</form>
-												</#list>
+												<form method="post" action="/del/job/${job.id}">
+													<a class="btn btn-default btn-xs" href="/view/job/${job.id}">
+														<i class="fa fa-eye"></i>
+													</a>
+													<a class="btn btn-default btn-xs" href="/edit/job/${job.id}">
+														<i class="fa fa-edit"></i>
+													</a>
+													<input type="hidden" name="${_csrf.parameterName}"
+														   value="${_csrf.token}"/>
+													<button class="btn btn-default btn-xs" type="submit">
+														<i class="fa fa-trash-o"></i>
+													</button>
+												</form>
 											</td>
 										</tr>
 									</#list>

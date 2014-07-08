@@ -40,69 +40,80 @@
 
 		<div id="content" class="container">
 		    <div id="customerInfoDiv" class="col-sm-4" >
-		    	<div id="customerInfoPanel" class="panel panel-">
+		    	<div id="customerInfoPanel" class="panel panel-default">
 		    		<div class="panel-heading">Customer Information</div>
 		    		<div class="panel-body">
-		    			<table class="table">
-		    				<tbody>
-		    					<tr>
-		    						<td class="text-right">Company</td><td>${customer.company}</td>
-		    					</tr>
-								<tr>
-								    <td class="text-right">Contact</td><td>${customer.contact}</td>
-								</tr>
-								<tr>
-								    <td class="text-right">Email</td><td>${customer.email}</td>
-								</tr>
-		    				</tbody>
-		    			</table>
+		    			<form id="editCustomerForm" role="form" method="post" action="/edit/customer/${customer.id}">
+		    			    <div class="form-group">
+								<label for="company">Company</label>
+		    			        <input type="text" id="company" name="company" class="form-control"
+		    			        placeholder="Company" required="true" value="${customer.company}"/>
+		    			    </div>
+		    			    <div class="form-group">
+								<label for="contact">Contact</label>
+		    			        <input type="text" id="contact" name="contact" class="form-control"
+		    			            placeholder="Contact" required="true" value="${customer.contact}"/>
+		    			    </div>
+		    			    <div class="form-group">
+								<label for="email">Email</label>
+		    			        <input type="email" id="email" name="email" class="form-control"
+		    			            placeholder="Email" required="true" value="${customer.email}"/>
+		    			    </div>
+		    			    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		    			    <button class="btn btn-md btn-primary btn-block" type="submit">Save</button>
+		    			</form>
 		    		</div>
 		    	</div>
 		    </div>
-			<div id="customerJobsTableDiv" class="col-sm-8" >
-			    <div id="customerJobsTablePanel" class="panel panel-default">
-			    	<div class="panel-heading">${customer.contact}'s Jobs
-						<span class="pull-right"><a href="/add/job/${customer.id}" id="addJob" class="">Add Job</a></span>
-					</div>
-			    	<div class="panel-body">
-			    		<div id="customerJobsTable" class="table-responsive">
-			    			 <table class="table table-striped">
-			    				<thead>
-			    					<tr>
-			    						<th>Job Number</th>
-			    						<th>Extra</th>
-			    						<th>Total</th>
-			    						<th>Options</th>
-			    					</tr>
-			    				</thead>
-			    				<tbody>
-			    					<#list customer.jobs as job>
-										<tr>
-											<td>${job.id}</td>
-											<td>extra</td>
-											<td>${job.jobTotal}</td>
-											<td>
-												<form method="post" action="/del/job/${job.id}">
-													<a class="btn btn-default btn-xs" href="/view/job/${job.id}">
-														<i class="fa fa-eye"></i>
-													</a>
-													<a class="btn btn-default btn-xs" href="/edit/job/${job.id}">
-														<i class="fa fa-edit"></i>
-													</a>
-													<input type="hidden" name="${_csrf.parameterName}"
-														   value="${_csrf.token}"/>
-													<button class="btn btn-default btn-xs" type="submit">
-														<i class="fa fa-trash-o"></i>
-													</button>
-												</form>
-											</td>
-										</tr>
-			    					</#list>
-			    				</tbody>
-			    			</table>
+			<div id="customerJobsTableDiv" class="col-sm-8">
+				<div id="breadcrumbs" class="row">
+					<span>${customer.toString()}</span>
+				</div>
+				<div class="row">
+			    	<div id="customerJobsTablePanel" class="panel panel-default">
+			    		<div class="panel-heading">
+							<a href="/add/job/${customer.id}" class="btn btn-default btn-sm col-sm-offset-11">Add Job</a>
+						</div>
+			    		<div class="panel-body">
+			    			<div id="customerJobsTable" class="table-responsive">
+			    				 <table class="table table-striped">
+			    					<thead>
+			    						<tr>
+			    							<th>Job Number</th>
+			    							<th>Rooms</th>
+			    							<th>Total</th>
+			    							<th>Options</th>
+			    						</tr>
+			    					</thead>
+			    					<tbody>
+			    						<#list customer.jobs as job>
+											<tr>
+												<td>${job.id}</td>
+												<td>${job.getRoomCount()}</td>
+												<td>${job.jobTotal}</td>
+												<td>
+													<form method="post" action="/del/job/${job.id}">
+														<a class="btn btn-default btn-xs" href="/view/job/${job.id}">
+															<i class="fa fa-eye"></i>
+														</a>
+														<a class="btn btn-default btn-xs" href="/edit/job/${job.id}">
+															<i class="fa fa-edit"></i>
+														</a>
+														<input type="hidden" name="${_csrf.parameterName}"
+															   value="${_csrf.token}"/>
+														<button class="btn btn-default btn-xs" type="submit">
+															<i class="fa fa-trash-o"></i>
+														</button>
+													</form>
+												</td>
+											</tr>
+			    						</#list>
+			    					</tbody>
+			    				</table>
+			    			</div>
 			    		</div>
 			    	</div>
-			    </div>
+				</div>
 			</div>
 		</div>
 

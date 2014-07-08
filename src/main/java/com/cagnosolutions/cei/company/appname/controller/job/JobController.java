@@ -39,10 +39,13 @@ public class JobController {
     public String addForm(Model model, @PathVariable(value="customer") Long customerId) {
 		Customer customer = customerService.findById(customerId);
 		Collection<Job> jobs = customer.getJobs();
-		jobs.add(new Job());
+		Job newJob = new Job();
+		newJob.setStatus("Quote");
+		jobs.add(newJob);
 		customer.setJobs(jobs);
-		customerService.update(customer);
-        return "redirect:/view/customer/" + customerId;
+		customer = customerService.update(customer);
+		Long newJobId = ((Job) customer.getJobs().toArray()[customer.getJobCount() -1]).getId();
+        return "redirect:/view/job/" + newJobId;
     }
 
     // add post
@@ -76,7 +79,10 @@ public class JobController {
     // edit post
     @RequestMapping(value = "/edit/job/{id}", method = RequestMethod.POST)
     public String edit(@PathVariable("id") Long id, Job job) {
-    	jobService.update(job);
-        return "redirect:/list/job";
+		Job existingJob = jobService.findById(id);
+		existingJob.setDescription(job.getDescription());
+		existingJob.setNotes(job.getNotes());
+    	jobService.update(existingJob);
+        return "redirect:/view/job/" + id;
     }
 }

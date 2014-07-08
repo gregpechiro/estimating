@@ -8,7 +8,6 @@ package com.cagnosolutions.cei.company.appname.domain;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 @Entity
 @Table(name = "job")
@@ -19,7 +18,7 @@ public class Job {
     private Long id;
     private String description;
     private String notes;
-    private Date dateCreated;
+    private Integer timeStamp;
 
     @ManyToOne
     @JoinColumn(name="jobs")
@@ -29,6 +28,7 @@ public class Job {
     @JoinColumn(name="rooms")
     private Collection<Room> rooms = new ArrayList<Room>();
     private double jobTotal;
+	private Short status;
 
     public Job() {
     }
@@ -36,6 +36,7 @@ public class Job {
     public String toString() {
         return String.format(
             "<ol class=\"breadcrumb\">" +
+				"<li><a href=\"/list/customer\">Customers</a></li>"+
                 "<li><a href=\"/view/customer/%d\">%s</a></li>" +
                 "<li class=\"active\">Job %d</li>" +
             "</ol>",
@@ -67,12 +68,12 @@ public class Job {
         this.notes = notes;
     }
 
-    public Date getDateCreated() {
-        return dateCreated;
+    public Integer getTimeStamp() {
+        return timeStamp;
     }
 
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setTimeStamp(Integer timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public Customer getCustomer() {
@@ -98,4 +99,16 @@ public class Job {
     public void setJobTotal(double jobTotal) {
         this.jobTotal = jobTotal;
     }
+
+	public Short getStatus() {
+		return status;
+	}
+
+	public void setStatus(Short status) {
+		this.status = status;
+	}
+
+	public int getRoomCount() {
+		return rooms.size();
+	}
 }

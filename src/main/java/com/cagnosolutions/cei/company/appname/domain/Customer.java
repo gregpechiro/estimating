@@ -30,6 +30,7 @@ public class Customer {
     public String toString() {
         return String.format(
                 "<ol class=\"breadcrumb\">" +
+					"<li><a href=\"/list/customer\">Customers</a></li>"+
                     "<li class=\"active\">%s</li>" +
                 "</ol>",
                 company);
@@ -74,4 +75,8 @@ public class Customer {
     public void setJobs(Collection<Job> jobs) {
         this.jobs = jobs;
     }
+
+	public int getJobCount() {
+		return jobs.size();
+	}
 }

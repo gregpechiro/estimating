@@ -24,8 +24,8 @@ public class CustomerService {
         return dao.saveAndFlush(customer);
     }
 
-    public void update(Customer customer) {
-        dao.save(customer);
+    public Customer update(Customer customer) {
+        return dao.save(customer);
     }
 
     public void delete(Customer customer) {

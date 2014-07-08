@@ -33,57 +33,92 @@
 						<li>
 							<a href="/list/job">All Jobs</a>
 						</li>
-						<li>
-							<a href="/add/room/${job.id}">Add Room</a>
-						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
-
-		<span></span>
 		
 		<div id="content" class="container">
-		    <div id="roomsTableDiv" class="col-sm-offset-2 col-sm-8" >
-		        <div id="roomsTablePanel" class="panel panel-default">
-		        	<div class="panel-heading">Rooms</div>
-		        	<div class="panel-body">
-		        		<div id="roomsTable" class="table-responsive">
-		        			 <table class="table table-striped">
-		        				<thead>
-		        					<tr>
-		        						<th>Name</th>
-		        						<th>extra</th>
-		        						<th>Options</th>
-		        					</tr>
-		        				</thead>
-								<#list job.rooms as room>
-		        					<tbody>
+			<div id="customerInfoDiv" class="col-sm-4" >
+				<div id="customerInfoPanel" class="panel panel-default">
+					<div class="panel-heading">Job Information</div>
+					<div class="panel-body">
+						<form id="editCustomerForm" role="form" method="post" action="/edit/${job.id}">
+							<div class="form-group">
+								<label for="description">Description</label>
+								<input type="text" id="description" name="description" class="form-control"
+									   placeholder="Description" value="${(job.description)!}"/>
+							</div>
+							<div class="form-group">
+								<label for="notes">Notes</label>
+								<textarea id="notes" rows="6" name="notes" class="form-control"
+									   placeholder="Notes" style="resize:none;" >${(job.notes)!}</textarea>
+							</div>
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							<button class="btn btn-md btn-primary btn-block" type="submit">Save</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		    <div id="roomsTableDiv" class="col-sm-8" >
+				<div id="breadcrumbs" class="row">
+					<span>${job.toString()}</span>
+				</div>
+				<div class="row">
+		        	<div id="roomsTablePanel" class="panel panel-default">
+		        		<div class="panel-heading container col-sm-12">
+							Room
+							<form role="form" method="post" action="/add/room" class="col-sm-5 pull-right">
+								<div class="input-group">
+									<input type="text" class="form-control input-sm" name="name" placeholder="Room Name"/>
+    								<span class="input-group-btn">
+    									<button type="submit" class="btn btn-default btn-sm">Add Room</button>
+    								</span>
+									<input type="hidden" id="jobId" name="jobId" value="${job.id}"/>
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+								</div>
+							</form>
+						</div>
+		        		<div class="panel-body">
+		        			<div id="roomsTable" class="table-responsive">
+		        				 <table class="table table-striped">
+		        					<thead>
 		        						<tr>
-		        							<td>${room.name}</td>
-		        							<td>extra</td>
-		        							<td>
-												<form method="post" action="/del/room/${room.id}">
-													<a class="btn btn-default btn-xs" href="/view/room/${room.id}">
-														<i class="fa fa-eye"></i>
-													</a>
-													<a class="btn btn-default btn-xs" href="/edit/room/${room.id}">
-														<i class="fa fa-edit"></i>
-													</a>
-													<input type="hidden" name="${_csrf.parameterName}"
-														   value="${_csrf.token}"/>
-													<button class="btn btn-default btn-xs" type="submit">
-														<i class="fa fa-trash-o"></i>
-													</button>
-												</form>
-		        							</td>
+		        							<th>Name</th>
+		        							<th>extra</th>
+											<th>Total</th>
+		        							<th>Options</th>
 		        						</tr>
-		        					</tbody>
-								</#list>
-		        			</table>	
+		        					</thead>
+									<#list job.rooms as room>
+		        						<tbody>
+		        							<tr>
+		        								<td>${room.name}</td>
+		        								<td>extra</td>
+												<td>${room.roomTotal}</td>
+		        								<td>
+													<form method="post" action="/del/room/${room.id}">
+														<a class="btn btn-default btn-xs" href="/view/room/${room.id}">
+															<i class="fa fa-eye"></i>
+														</a>
+														<a class="btn btn-default btn-xs" href="/edit/room/${room.id}">
+															<i class="fa fa-edit"></i>
+														</a>
+														<input type="hidden" name="${_csrf.parameterName}"
+															   value="${_csrf.token}"/>
+														<button class="btn btn-default btn-xs" type="submit">
+															<i class="fa fa-trash-o"></i>
+														</button>
+													</form>
+		        								</td>
+		        							</tr>
+		        						</tbody>
+									</#list>
+		        				</table>
+		        			</div>
 		        		</div>
 		        	</div>
-		        </div>
+				</div>
 		    </div>
 		</div>
 

@@ -35,6 +35,7 @@ public class Room {
     public String toString() {
         return String.format(
             "<ol class=\"breadcrumb\">" +
+				"<li><a href=\"/list/customer\">Customers</a></li>"+
                 "<li><a href=\"/view/customer/%d\">%s</a></li>" +
                 "<li><a href=\"/view/job/%d\">Job %d</a></li>" +
                 "<li class=\"active\">%s</li>" +

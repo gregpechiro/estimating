@@ -51,6 +51,7 @@
 		        						<th>Company</th>
 		        						<th>Contact</th>
 		        						<th>Email</th>
+										<th>Jobs</th>
 		        						<th>Options</th>
 		        					</tr>
 		        				</thead>
@@ -60,6 +61,7 @@
 											<td>${customer.company}</td>
 											<td>${customer.contact}</td>
 											<td>${customer.email}</td>
+											<td>${customer.getJobCount()}</td>
 											<td>
 												<form method="post" action="/del/customer/${customer.id}">
 													<a class="btn btn-default btn-xs"
