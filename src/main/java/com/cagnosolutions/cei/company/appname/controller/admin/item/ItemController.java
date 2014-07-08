@@ -5,6 +5,7 @@ package com.cagnosolutions.cei.company.appname.controller.admin.item;
  */
 
 import com.cagnosolutions.cei.company.appname.domain.Item;
+import com.cagnosolutions.cei.company.appname.service.FlashService;
 import com.cagnosolutions.cei.company.appname.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller(value = "adminItemController")
 @RequestMapping("/admin")
@@ -20,6 +22,9 @@ public class ItemController {
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private FlashService flashService;
 
     // list get
     @RequestMapping(value = "/list/item", method = RequestMethod.GET)
@@ -37,9 +42,10 @@ public class ItemController {
 
     // add post
     @RequestMapping(value = "/add/item", method = RequestMethod.POST)
-    public String add(Item item) {
+    public String add(Item item, RedirectAttributes attr) {
         itemService.insert(item);
-        return "redirect:/admin/add/item?added";
+        flashService.flash(attr, "add.success");
+        return "redirect:/admin/add/item";
     }
 
     // view get
@@ -51,9 +57,10 @@ public class ItemController {
 
     // delete post
     @RequestMapping(value = "/del/item/{id}", method = RequestMethod.POST)
-    public String delete(@PathVariable("id") Long id, Model model) {
+    public String delete(@PathVariable("id") Long id, RedirectAttributes attr) {
         itemService.delete(itemService.findById(id));
-        return "redirect:/admin/list/item?removed";
+        flashService.flash(attr, "delete.success");
+        return "redirect:/admin/list/item";
     }
 
     // edit get
@@ -65,12 +72,13 @@ public class ItemController {
 
     // edit post
     @RequestMapping(value = "/edit/item/{id}", method = RequestMethod.POST)
-    public String edit(@PathVariable("id") Long id, Item item) {
-    
-	    /*
-	     *  Implement edit/update
-	     */
-
+    public String edit(@PathVariable("id") Long id, Item item, RedirectAttributes attr) {
+        item.setId(id);
+        Item updated = itemService.update(item);
+        if(item.equals(updated))
+            flashService.flash(attr, "update.success");
+        else
+            flashService.flash(attr, "update.error");
         return "redirect:/admin/edit/item/" + id + "?status";
     }
 }

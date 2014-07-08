@@ -24,8 +24,8 @@ public class ItemService {
         return dao.saveAndFlush(item);
     }
 
-    public void update(Item item) {
-        dao.save(item);
+    public Item update(Item item) {
+        return dao.save(item);
     }
 
     public void delete(Item item) {

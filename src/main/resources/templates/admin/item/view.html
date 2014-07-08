@@ -3,10 +3,10 @@
 
 	<head id="head">
 		
-		<title>Admin</title>
+		<title>View Item</title>
 		<meta charset="utf-8"/>	
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta name="description" content="admin home"/>
+		<meta name="description" content="admin view item"/>
 		<meta name="author" content="scott cagno"/>
 		<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->  
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"/>
@@ -28,17 +28,14 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Admin Home</a>
+					<a class="navbar-brand" href="#">View Item</a>
 				</div>
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="/admin/list/user">Manage Users</a>
-                        </li>
-                        <li>
-                            <a href="/admin/list/item">Manage Items</a>
-                        </li>
-                        <li>
+						<li>
+							<a href="/admin">Home</a>
+						</li>
+						<li>
 							<a href="/logout">Logout</a>
 						</li>
 					</ul>
@@ -49,11 +46,38 @@
 		<!-- content -->
 		<div id="content" class="container">
 			${(msg)! ""}
-			<div id="jumbotron" class="text-left col-sm-12">
-				<h1>Admin console. <small>Logged in as ${username}</small></h1>
+			<div class="col-sm-offset-4 col-sm-4">
+				<div class="panel panel-default">
+	  				<div class="panel-heading">View Item</div>
+  					<div class="panel-body">
+	  					<table class="table">
+	  						<tbody>
+	  							<tr>
+	  								<td class="text-right">Id:</td><td>${item.id}</td>
+	  							</tr>
+                                <tr>
+                                    <td class="text-right">Name:</td><td>${item.name}</td>
+                                </tr>
+	  							<tr>
+	  								<td class="text-right">Description:</td><td>${item.description}</td>
+	  							</tr>
+	  							<tr>
+	  								<td class="text-right">Category:</td><td>${item.category}</td>
+	  							</tr>
+                                <tr>
+                                    <td class="text-right">Your Cost:</td><td>${item.cost}</td>
+                                </tr>
+	  							<tr>
+	  								<td class="text-right">Your Price:</td><td>${item.price}</td>
+	  							</tr>
+	  						</tbody>
+	  					</table>
+                        <a href="/admin/list/item" class="btn btn-default btn-block">Back</a>
+                    </div>
+	 			</div>
 			</div>
 		</div>
-		
+			
 		<!-- footer -->
 		<div id="footer" class="container"></div>
 

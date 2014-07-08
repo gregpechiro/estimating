@@ -22,6 +22,7 @@ public class Item {
     private String description;
     private String category;
     private double cost;
+    private double price;
 
     public Item() {
     }
@@ -68,5 +69,13 @@ public class Item {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
