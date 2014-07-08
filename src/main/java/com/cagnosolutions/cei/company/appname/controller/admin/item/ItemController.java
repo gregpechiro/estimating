@@ -29,7 +29,7 @@ public class ItemController {
     // list get
     @RequestMapping(value = "/list/item", method = RequestMethod.GET)
     public String list(Model model, @RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order) {
-        model.addAttribute("item", itemService.findAllSorted(sort, order));
+        model.addAttribute("items", itemService.findAllSorted(sort, order));
         return "admin/item/list";
     }
 
@@ -74,11 +74,8 @@ public class ItemController {
     @RequestMapping(value = "/edit/item/{id}", method = RequestMethod.POST)
     public String edit(@PathVariable("id") Long id, Item item, RedirectAttributes attr) {
         item.setId(id);
-        Item updated = itemService.update(item);
-        if(item.equals(updated))
-            flashService.flash(attr, "update.success");
-        else
-            flashService.flash(attr, "update.error");
-        return "redirect:/admin/edit/item/" + id + "?status";
+		itemService.update(item);
+    	flashService.flash(attr, "update.success");
+        return "redirect:/admin/edit/item/" + id;
     }
 }

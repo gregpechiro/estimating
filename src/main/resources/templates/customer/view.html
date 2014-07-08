@@ -72,7 +72,8 @@
 				<div class="row">
 			    	<div id="customerJobsTablePanel" class="panel panel-default">
 			    		<div class="panel-heading">
-							<a href="/add/job/${customer.id}" class="btn btn-default btn-sm col-sm-offset-11">Add Job</a>
+							Jobs
+							<a href="/add/job/${customer.id}" class="btn btn-default btn-sm col-sm-offset-10">Add Job</a>
 						</div>
 			    		<div class="panel-body">
 			    			<div id="customerJobsTable" class="table-responsive">
@@ -80,7 +81,9 @@
 			    					<thead>
 			    						<tr>
 			    							<th>Job Number</th>
+											<th>PO</th>
 			    							<th>Rooms</th>
+											<th>Status</th>
 			    							<th>Total</th>
 			    							<th>Options</th>
 			    						</tr>
@@ -89,15 +92,29 @@
 			    						<#list customer.jobs as job>
 											<tr>
 												<td>${job.id}</td>
+												<td>${job.po}</td>
 												<td>${job.getRoomCount()}</td>
+												<td>
+													<#switch job.status>
+														<#case 1>
+															Quote
+															<#break>
+														<#case 2>
+															Active
+															<#break>
+														<#case 3>
+															Billed
+															<#break>
+														<#case 4>
+															<span class="text-success">Paid</span>
+															<#break>
+													</#switch>
+												</td>
 												<td>${job.jobTotal}</td>
 												<td>
 													<form method="post" action="/del/job/${job.id}">
 														<a class="btn btn-default btn-xs" href="/view/job/${job.id}">
 															<i class="fa fa-eye"></i>
-														</a>
-														<a class="btn btn-default btn-xs" href="/edit/job/${job.id}">
-															<i class="fa fa-edit"></i>
 														</a>
 														<input type="hidden" name="${_csrf.parameterName}"
 															   value="${_csrf.token}"/>

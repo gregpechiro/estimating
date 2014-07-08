@@ -29,8 +29,10 @@ public class Job {
     private Collection<Room> rooms = new ArrayList<Room>();
     private double jobTotal;
 	private Short status;
+	private String po;
 
     public Job() {
+		this.po = "PO_"+String.valueOf(System.currentTimeMillis()).substring(6,12);
     }
 
     public String toString() {
@@ -108,7 +110,19 @@ public class Job {
 		this.status = status;
 	}
 
+	public String getPo() {
+		return po;
+	}
+
+	public void setPo(String po) {
+		this.po = po;
+	}
+
 	public int getRoomCount() {
 		return rooms.size();
+	}
+
+	public void nextStatus() {
+		this.status++;
 	}
 }

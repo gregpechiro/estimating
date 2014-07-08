@@ -40,7 +40,7 @@ public class JobController {
 		Customer customer = customerService.findById(customerId);
 		Collection<Job> jobs = customer.getJobs();
 		Job newJob = new Job();
-		newJob.setStatus("Quote");
+		newJob.setStatus((short) 1);
 		jobs.add(newJob);
 		customer.setJobs(jobs);
 		customer = customerService.update(customer);
@@ -85,4 +85,13 @@ public class JobController {
     	jobService.update(existingJob);
         return "redirect:/view/job/" + id;
     }
+
+	// next status
+	@RequestMapping(value="/next/status/{id}", method=RequestMethod.GET)
+	public String next(@PathVariable("id") Long id) {
+		Job job = jobService.findById(id);
+		job.nextStatus();
+		jobService.update(job);
+		return "redirect:/view/job/" + id;
+	}
 }
