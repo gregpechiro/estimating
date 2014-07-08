@@ -5,11 +5,7 @@ package com.cagnosolutions.cei.company.appname.domain;
  * Copyright Cagno Solutions. All rights reserved.
  */
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "item")
@@ -78,4 +74,5 @@ public class Item {
     public void setPrice(double price) {
         this.price = price;
     }
+
 }

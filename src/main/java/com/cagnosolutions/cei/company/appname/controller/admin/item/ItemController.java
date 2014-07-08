@@ -28,8 +28,13 @@ public class ItemController {
 
     // list get
     @RequestMapping(value = "/list/item", method = RequestMethod.GET)
-    public String list(Model model, @RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order) {
-        model.addAttribute("items", itemService.findAllSorted(sort, order));
+    public String list(Model model, @RequestParam(value = "category", required = false) String category, @RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order) {
+        if(category == null) {
+            model.addAttribute("items", itemService.findAllSorted(sort, order));
+        } else {
+            model.addAttribute("items", itemService.findAllByCategory(category));
+        }
+        model.addAttribute("categories", itemService.getUniqueItemsByCategory());
         return "admin/item/list";
     }
 

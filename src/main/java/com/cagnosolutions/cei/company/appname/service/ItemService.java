@@ -11,7 +11,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Transactional
 @Service("itemService")
@@ -56,4 +59,16 @@ public class ItemService {
         return (string == null || string.equals(""));
     }
 
+    public List<Item> findAllByCategory(String category) {
+        return dao.findAllByCategory(category);
+    }
+
+    public Set<String> getUniqueItemsByCategory() {
+        List<String> categories = new ArrayList<>();
+        List<Item> allItems = dao.findAll();
+        for(Item item : allItems) {
+            categories.add(item.getCategory());
+        }
+        return new HashSet(categories);
+    }
 }
