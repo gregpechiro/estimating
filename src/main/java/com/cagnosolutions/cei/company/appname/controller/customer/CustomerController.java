@@ -55,13 +55,6 @@ public class CustomerController {
         return "redirect:/list/customer";
     }
 
-    // edit get
-    @RequestMapping(value = "/edit/customer/{id}", method = RequestMethod.GET)
-    public String editForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("customer", customerService.findById(id));
-        return "customer/edit";
-    }
-
     // edit post
     @RequestMapping(value = "/edit/customer/{id}", method = RequestMethod.POST)
     public String edit(@PathVariable("id") Long id, Customer customer) {

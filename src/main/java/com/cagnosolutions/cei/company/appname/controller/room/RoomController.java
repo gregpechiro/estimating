@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Arrays;
 import java.util.Collection;
 
 @Controller(value = "roomController")
@@ -27,21 +26,6 @@ public class RoomController {
 
 	@Autowired
 	private JobService jobService;
-
-    // list get
-    @RequestMapping(value = "/list/room", method = RequestMethod.GET)
-    public String list(Model model, @RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order) {
-        model.addAttribute("room", roomService.findAllSorted(sort, order));
-        return "room/list";
-    }
-
-    // add get
-    @RequestMapping(value = "/add/room/{job}", method = RequestMethod.GET)
-    public String addForm(Model model, @PathVariable("job") Long jobId) {
-        model.addAttribute("room", new Room());
-		model.addAttribute("job", jobService.findById(jobId));
-        return "room/add";
-    }
 
     // add post
     @RequestMapping(value = "/add/room", method = RequestMethod.POST)
@@ -63,22 +47,18 @@ public class RoomController {
 
     // delete post
     @RequestMapping(value = "/del/room/{id}", method = RequestMethod.POST)
-    public String delete(@PathVariable("id") Long id, Model model) {
+    public String delete(@PathVariable("id") Long id, Model model, @RequestParam(value="jobId") Long jobId) {
         roomService.delete(roomService.findById(id));
-        return "redirect:/list/room?removed";
-    }
-
-    // edit get
-    @RequestMapping(value = "/edit/room/{id}", method = RequestMethod.GET)
-    public String editForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("room", roomService.findById(id));
-        return "room/edit";
+        return "redirect:/view/job/" + jobId;
     }
 
     // edit post
     @RequestMapping(value = "/edit/room/{id}", method = RequestMethod.POST)
     public String edit(@PathVariable("id") Long id, Room room) {
-  		roomService.update(room);
-        return "redirect:/view/job/" + room.getJob().getId();
+		Room existingRoom = roomService.findById(id);
+		existingRoom.setName(room.getName());
+		existingRoom.setNotes(room.getNotes());
+  		roomService.update(existingRoom);
+        return "redirect:/view/room/" + id;
     }
 }

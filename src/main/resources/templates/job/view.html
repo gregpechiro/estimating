@@ -43,7 +43,7 @@
 				<div id="customerInfoPanel" class="panel panel-default">
 					<div class="panel-heading">Job Information</div>
 					<div class="panel-body">
-						<form id="editCustomerForm" role="form" method="post" action="/edit/${job.id}">
+						<form id="editCustomerForm" role="form" method="post" action="/edit/job/${job.id}">
 							<div class="form-group">
 								<label for="po">PO</label>
 								<input type="text" id="po" name="po" class="form-control"
@@ -66,7 +66,7 @@
 										<a href="/next/status/${job.id}" class="btn btn-default pull-right">Change to Active</a>
 										<#break>
 									<#case 2>
-										<span class="lead">Invoiced</span>
+										<span class="lead">Active</span>
 										<a href="/next/status/${job.id}" class="btn btn-default pull-right">Change to Billed</a>
 										<#break>
 									<#case 3>
@@ -91,7 +91,7 @@
 				</div>
 				<div class="row">
 		        	<div id="roomsTablePanel" class="panel panel-default">
-		        		<div class="panel-heading container col-sm-12">
+		        		<div class="panel-heading col-sm-12">
 							Room
 							<form role="form" method="post" action="/add/room" class="col-sm-5 pull-right">
 								<div class="input-group">
@@ -99,9 +99,9 @@
     								<span class="input-group-btn">
     									<button type="submit" class="btn btn-default btn-sm">Add Room</button>
     								</span>
-									<input type="hidden" id="jobId" name="jobId" value="${job.id}"/>
-									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 								</div>
+								<input type="hidden" id="jobId" name="jobId" value="${job.id}"/>
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 							</form>
 						</div>
 		        		<div class="panel-body">
@@ -115,8 +115,8 @@
 		        							<th>Options</th>
 		        						</tr>
 		        					</thead>
-									<#list job.rooms as room>
-		        						<tbody>
+		        					<tbody></tbody>
+										<#list job.rooms as room>
 		        							<tr>
 		        								<td>${room.name}</td>
 		        								<td>extra</td>
@@ -126,16 +126,16 @@
 														<a class="btn btn-default btn-xs" href="/view/room/${room.id}">
 															<i class="fa fa-eye"></i>
 														</a>
-														<input type="hidden" name="${_csrf.parameterName}"
-															   value="${_csrf.token}"/>
+														<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+														<input type="hidden" id="jobId" name="jobId" value="${job.id}"/>
 														<button class="btn btn-default btn-xs" type="submit">
 															<i class="fa fa-trash-o"></i>
 														</button>
 													</form>
 		        								</td>
 		        							</tr>
-		        						</tbody>
-									</#list>
+										</#list>
+		        					</tbody>
 		        				</table>
 		        			</div>
 		        		</div>

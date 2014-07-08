@@ -34,9 +34,9 @@ public class JobController {
         return "job/list";
     }
 
-    // add get
-    @RequestMapping(value = "/add/job/{customer}", method = RequestMethod.GET)
-    public String addForm(Model model, @PathVariable(value="customer") Long customerId) {
+    // add post
+    @RequestMapping(value = "/add/job", method = RequestMethod.POST)
+    public String add(Model model, @RequestParam(value="customerId") Long customerId) {
 		Customer customer = customerService.findById(customerId);
 		Collection<Job> jobs = customer.getJobs();
 		Job newJob = new Job();
@@ -48,13 +48,6 @@ public class JobController {
         return "redirect:/view/job/" + newJobId;
     }
 
-    // add post
-    @RequestMapping(value = "/add/job", method = RequestMethod.POST)
-    public String add(Job job) {
-        jobService.insert(job);
-        return "redirect:/list/job";
-    }
-
     // view get
     @RequestMapping(value = "/view/job/{id}", method = RequestMethod.GET)
     public String view(@PathVariable("id") Long id, Model model) {
@@ -64,16 +57,9 @@ public class JobController {
 
     // delete post
     @RequestMapping(value = "/del/job/{id}", method = RequestMethod.POST)
-    public String delete(@PathVariable("id") Long id, Model model) {
+    public String delete(@PathVariable("id") Long id, Model model,  @RequestParam(value="customerId") Long customerId) {
         jobService.delete(jobService.findById(id));
-        return "redirect:/list/job?removed";
-    }
-
-    // edit get
-    @RequestMapping(value = "/edit/job/{id}", method = RequestMethod.GET)
-    public String editForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("job", jobService.findById(id));
-        return "job/edit";
+        return "redirect:/list/customer/" + customerId;
     }
 
     // edit post
