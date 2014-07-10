@@ -35,9 +35,9 @@ public class Room {
     public String toString() {
         return String.format(
             "<ol class=\"breadcrumb\">" +
-				"<li><a href=\"/list/customer\">Customers</a></li>"+
-                "<li><a href=\"/view/customer/%d\">%s</a></li>" +
-                "<li><a href=\"/view/job/%d\">Job %d</a></li>" +
+				"<li><a href=\"/app/list/customer\">Customers</a></li>"+
+                "<li><a href=\"/app/view/customer/%d\">%s</a></li>" +
+                "<li><a href=\"/app/view/job/%d\">Job %d</a></li>" +
                 "<li class=\"active\">%s</li>" +
             "</ol>",
             job.getCustomer().getId(), job.getCustomer().getCompany(),

@@ -38,8 +38,8 @@ public class Job {
     public String toString() {
         return String.format(
             "<ol class=\"breadcrumb\">" +
-				"<li><a href=\"/list/customer\">Customers</a></li>"+
-                "<li><a href=\"/view/customer/%d\">%s</a></li>" +
+				"<li><a href=\"/app/list/customer\">Customers</a></li>"+
+                "<li><a href=\"/app/view/customer/%d\">%s</a></li>" +
                 "<li class=\"active\">Job %d</li>" +
             "</ol>",
             getCustomer().getId(), getCustomer().getCompany(),

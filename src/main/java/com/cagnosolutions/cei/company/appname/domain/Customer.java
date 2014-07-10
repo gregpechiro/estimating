@@ -30,7 +30,7 @@ public class Customer {
     public String toString() {
         return String.format(
                 "<ol class=\"breadcrumb\">" +
-					"<li><a href=\"/list/customer\">Customers</a></li>"+
+					"<li><a href=\"/app/list/customer\">Customers</a></li>"+
                     "<li class=\"active\">%s</li>" +
                 "</ol>",
                 company);
