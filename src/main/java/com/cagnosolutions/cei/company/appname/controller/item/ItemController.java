@@ -30,7 +30,7 @@ public class ItemController {
 			model.addAttribute("items", itemService.findAllByCategory(category));
 		}
 		model.addAttribute("categories", itemService.getUniqueItemsByCategory());
-		return "admin/item/list";
+		return "item/list";
 	}
 
     // add get

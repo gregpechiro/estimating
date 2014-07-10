@@ -45,8 +45,7 @@
 		<!-- content -->
 		<div id="content" class="container">
 			<div class="panel panel-default">
-	  			<div class="panel-heading">
-                    <a class="btn btn-default btn-sm" href="/admin/add/item">Add Item</a>
+	  			<div class="panel-heading col-sm-12">
                     <div class="dropdown pull-right">
                         <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="categoryFilter" data-toggle="dropdown">
                             Filter By Category
@@ -86,6 +85,18 @@
 										<td>${item.category}</td>
 										<td>${item.cost}</td>
                                         <td>${item.price}</td>
+										<td class="col-sm-2">
+											<form id="addItemForm" role="form" method="post" action="/add/room/item/${item.id}">
+											    <div class="input-group">
+											        <input type="text" id="quantity" name="quantity" class="form-control"
+											        placeholder="Quantity" required="true"/>
+													<span class="input-group-btn">
+														<button class="btn btn-md btn-success" type="submit">Add</button>
+													</span>
+											    </div>
+											    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+											</form>
+										</td>
 									</tr>
 								</#list>
 							</tbody>
