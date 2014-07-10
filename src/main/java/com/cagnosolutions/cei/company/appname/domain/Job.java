@@ -21,11 +21,11 @@ public class Job {
     private Integer timeStamp;
 
     @ManyToOne
-    @JoinColumn(name="jobs")
+    @JoinColumn(name="customer")
     private Customer customer;
 
     @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="rooms")
+    @JoinColumn(name="job")
     private Collection<Room> rooms = new ArrayList<Room>();
     private double jobTotal;
 	private Short status;

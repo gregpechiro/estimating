@@ -21,7 +21,7 @@ public class Customer {
     private String email;
 
     @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="jobs")
+    @JoinColumn(name="customer")
     private Collection<Job> jobs = new ArrayList<Job>();
 
     public Customer() {

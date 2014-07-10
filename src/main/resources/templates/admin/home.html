@@ -44,12 +44,30 @@
 		</div>
 
 		<!-- content -->
-		<div id="content" class="container">
+		<div id="heading" class="container">
 			${(msg)! ""}
 			<div id="jumbotron" class="text-left col-sm-12">
 				<h1>Preferences <small>and global settings.</small></h1>
 			</div>
 		</div>
+
+        <div id="content" class="container">
+            <div class="panel panel-default">
+            	<div class="panel-heading">Global Settings</div>
+            	<div class="panel-body">
+            	    <form id="pricing" role="form" method="post" action="/admin/edit/settings">
+            			<div class="form-group">
+            				<input type="text" name="markup" class="form-control" placeholder="Global Markup" value="${settings.markup}" required="true"/>
+            			</div>
+                        <div class="form-group">
+                            <input type="text" name="rate" class="form-control" placeholder="Hourly Rate" value="${settings.rate}" required="true"/>
+                        </div>
+            			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            			<button class="btn btn-md btn- btn-block" type="submit"></button>
+            		</form>
+            	</div>
+            </div>
+        </div>
 		
 		<!-- footer -->
 		<div id="footer" class="container"></div>

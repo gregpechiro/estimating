@@ -20,12 +20,12 @@ public class Room {
     private String notes;
 
 	@ManyToOne
-	@JoinColumn(name="rooms")
+	@JoinColumn(name="job")
 	private Job job;
 
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="room_item")
-    private Collection<Item> items = new ArrayList<Item>();
+    private Collection<LineItem> items = new ArrayList<>();
     private double roomTotal;
     private int labor;
 
@@ -77,11 +77,11 @@ public class Room {
 		this.job = job;
 	}
 
-	public Collection<Item> getItems() {
+	public Collection<LineItem> getItems() {
         return items;
     }
 
-    public void setItems(Collection<Item> items) {
+    public void setItems(Collection<LineItem> items) {
         this.items = items;
     }
 
