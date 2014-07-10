@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@RequestMapping("/app")
 @Controller(value = "customerController")
 public class CustomerController {
 
@@ -38,7 +39,7 @@ public class CustomerController {
     @RequestMapping(value = "/add/customer", method = RequestMethod.POST)
     public String add(Customer customer) {
         customerService.insert(customer);
-        return "redirect:/list/customer";
+        return "redirect:/app/list/customer";
     }
 
     // view get
@@ -52,7 +53,7 @@ public class CustomerController {
     @RequestMapping(value = "/del/customer/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable("id") Long id, Model model) {
         customerService.delete(customerService.findById(id));
-        return "redirect:/list/customer";
+        return "redirect:/app/list/customer";
     }
 
     // edit post
@@ -63,6 +64,6 @@ public class CustomerController {
 		existingCustomer.setContact(customer.getContact());
 		existingCustomer.setEmail(customer.getEmail());
 		customerService.update(existingCustomer);
-        return "redirect:/view/customer/" + id;
+        return "redirect:/app/view/customer/" + id;
     }
 }

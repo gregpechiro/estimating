@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@RequestMapping("/app")
 @Controller(value = "itemController")
 public class ItemController {
 
@@ -21,11 +22,16 @@ public class ItemController {
     private ItemService itemService;
 
     // list get
-    @RequestMapping(value = "/list/item", method = RequestMethod.GET)
-    public String list(Model model, @RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order) {
-        model.addAttribute("item", itemService.findAllSorted(sort, order));
-        return "item/list";
-    }
+	@RequestMapping(value = "/list/item", method = RequestMethod.GET)
+	public String list(Model model, @RequestParam(value = "category", required = false) String category, @RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order) {
+		if(category == null) {
+			model.addAttribute("items", itemService.findAllSorted(sort, order));
+		} else {
+			model.addAttribute("items", itemService.findAllByCategory(category));
+		}
+		model.addAttribute("categories", itemService.getUniqueItemsByCategory());
+		return "admin/item/list";
+	}
 
     // add get
     @RequestMapping(value = "/add/item", method = RequestMethod.GET)
@@ -38,7 +44,7 @@ public class ItemController {
     @RequestMapping(value = "/add/item", method = RequestMethod.POST)
     public String add(Item item) {
         itemService.insert(item);
-        return "redirect:/add/item?added";
+        return "redirect:/app/add/item?added";
     }
 
     // view get
@@ -52,7 +58,7 @@ public class ItemController {
     @RequestMapping(value = "/del/item/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable("id") Long id, Model model) {
         itemService.delete(itemService.findById(id));
-        return "redirect:/list/item?removed";
+        return "redirect:/app/list/item?removed";
     }
 
     // edit get
@@ -70,6 +76,6 @@ public class ItemController {
 	     *  Implement edit/update
 	     */
 
-        return "redirect:/edit/item/" + id + "?status";
+        return "redirect:/app/edit/item/" + id + "?status";
     }
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collection;
 
+@RequestMapping("/app")
 @Controller(value = "roomController")
 public class RoomController {
 
@@ -35,7 +36,7 @@ public class RoomController {
 		rooms.add(room);
 		job.setRooms(rooms);
 		jobService.update(job);
-        return "redirect:/view/job/"+job.getId();
+        return "redirect:/app/view/job/"+job.getId();
     }
 
     // view get
@@ -49,7 +50,7 @@ public class RoomController {
     @RequestMapping(value = "/del/room/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable("id") Long id, Model model, @RequestParam(value="jobId") Long jobId) {
         roomService.delete(roomService.findById(id));
-        return "redirect:/view/job/" + jobId;
+        return "redirect:/app/view/job/" + jobId;
     }
 
     // edit post
@@ -59,6 +60,6 @@ public class RoomController {
 		existingRoom.setName(room.getName());
 		existingRoom.setNotes(room.getNotes());
   		roomService.update(existingRoom);
-        return "redirect:/view/room/" + id;
+        return "redirect:/app/view/room/" + id;
     }
 }

@@ -22,7 +22,7 @@ public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
-        return "redirect:/home";
+        return "redirect:/app/list/customer";
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)

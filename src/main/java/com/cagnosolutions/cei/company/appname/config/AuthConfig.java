@@ -43,7 +43,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.antMatchers("/admin/**").hasAnyRole("ADMIN")
-				.antMatchers("/user/**").hasAnyRole("ADMIN","USER")
+				.antMatchers("/app/**").hasAnyRole("ADMIN","USER")
 			.and()
 				.formLogin().loginPage("/login")
 			.and()

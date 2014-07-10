@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collection;
 
+@RequestMapping("/app")
 @Controller(value = "jobController")
 public class JobController {
 
@@ -45,7 +46,7 @@ public class JobController {
 		customer.setJobs(jobs);
 		customer = customerService.update(customer);
 		Long newJobId = ((Job) customer.getJobs().toArray()[customer.getJobCount() -1]).getId();
-        return "redirect:/view/job/" + newJobId;
+        return "redirect:/app/view/job/" + newJobId;
     }
 
     // view get
@@ -59,7 +60,7 @@ public class JobController {
     @RequestMapping(value = "/del/job/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable("id") Long id, Model model,  @RequestParam(value="customerId") Long customerId) {
         jobService.delete(jobService.findById(id));
-        return "redirect:/view/customer/" + customerId;
+        return "redirect:/app/view/customer/" + customerId;
     }
 
     // edit post
@@ -69,7 +70,7 @@ public class JobController {
 		existingJob.setDescription(job.getDescription());
 		existingJob.setNotes(job.getNotes());
     	jobService.update(existingJob);
-        return "redirect:/view/job/" + id;
+        return "redirect:/app/view/job/" + id;
     }
 
 	// next status
@@ -78,6 +79,6 @@ public class JobController {
 		Job job = jobService.findById(id);
 		job.nextStatus();
 		jobService.update(job);
-		return "redirect:/view/job/" + id;
+		return "redirect:/app/view/job/" + id;
 	}
 }

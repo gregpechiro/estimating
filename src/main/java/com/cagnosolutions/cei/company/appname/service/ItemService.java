@@ -69,6 +69,7 @@ public class ItemService {
         for(Item item : allItems) {
             categories.add(item.getCategory());
         }
-        return new HashSet(categories);
+
+        return new HashSet<String>(categories);
     }
 }
