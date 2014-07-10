@@ -29,7 +29,7 @@
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="/list/job">All Jobs</a>
+							<a href="/app/list/job">All Jobs</a>
 						</li>
 					</ul>
 				</div>
@@ -41,7 +41,7 @@
 		        <div id="customerTablePanel" class="panel panel-default">
 		        	<div class="panel-heading col-sm-12">
 						Customers
-						<a href="/add/customer" class="btn btn-default btn-sm pull-right">Add Customer</a>
+						<a href="/app/add/customer" class="btn btn-default btn-sm pull-right">Add Customer</a>
 					</div>
 		        	<div class="panel-body">
 		        		<div id="customerTable" class="table-responsive">
@@ -63,7 +63,7 @@
 											<td>${customer.email}</td>
 											<td>${customer.getJobCount()}</td>
 											<td>
-												<a class="btn btn-default btn-xs" href="/view/customer/${customer.id}">
+												<a class="btn btn-default btn-xs" href="/app/view/customer/${customer.id}">
 													<i class="fa fa-eye"></i>
 												</a>
 												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -114,7 +114,7 @@
 			<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 			<script>
 				$('button.customerDel').click(function() {
-					$('form[id="deleteCustomerForm"]').attr('action', '/del/customer/'+this.getAttribute('data-id'));
+					$('form[id="deleteCustomerForm"]').attr('action', '/app/del/customer/'+this.getAttribute('data-id'));
 					$('div[id="deleteCustomerModal"]').modal();
 				});
 			</script>

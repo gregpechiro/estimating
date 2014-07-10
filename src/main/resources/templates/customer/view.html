@@ -28,10 +28,10 @@
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="/list/customer">All Customers</a>
+							<a href="/app/list/customer">All Customers</a>
 						</li>
 						<li>
-							<a href="/list/job">All jobs</a>
+							<a href="/app/list/job">All jobs</a>
 						</li>
 					</ul>
 				</div>
@@ -43,7 +43,7 @@
 		    	<div id="customerInfoPanel" class="panel panel-default">
 		    		<div class="panel-heading">Customer Information</div>
 		    		<div class="panel-body">
-		    			<form id="editCustomerForm" role="form" method="post" action="/edit/customer/${customer.id}">
+		    			<form id="editCustomerForm" role="form" method="post" action="/app/edit/customer/${customer.id}">
 		    			    <div class="form-group">
 								<label for="company">Company</label>
 		    			        <input type="text" id="company" name="company" class="form-control"
@@ -73,7 +73,7 @@
 			    	<div id="customerJobsTablePanel" class="panel panel-default">
 			    		<div class="panel-heading col-sm-12">
 							Jobs
-							<form role="form" method="post" action="/add/job" class="pull-right">
+							<form role="form" method="post" action="/app/add/job" class="pull-right">
 								<div class="input-group">
     								<button type="submit" class="btn btn-default btn-sm">Add Job</button>
 									<input type="hidden" id="customerId" name="customerId" value="${customer.id}"/>
@@ -118,7 +118,7 @@
 												</td>
 												<td>${job.jobTotal}</td>
 												<td>
-													<a class="btn btn-default btn-xs" href="/view/job/${job.id}">
+													<a class="btn btn-default btn-xs" href="/app/view/job/${job.id}">
 														<i class="fa fa-eye"></i>
 													</a>
 													<button data-id="${job.id}" data-customer="${job.customer.id}" class="btn btn-default btn-xs jobDel">
@@ -170,7 +170,7 @@
 			<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 			<script>
 				$('button.jobDel').click(function() {
-					$('form[id="deleteJobForm"]').attr('action', '/del/job/'+this.getAttribute('data-id'));
+					$('form[id="deleteJobForm"]').attr('action', '/app/del/job/'+this.getAttribute('data-id'));
 					$('div[id="deleteJobModal"]').modal();
 				});
 			</script>

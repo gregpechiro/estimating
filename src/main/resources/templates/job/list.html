@@ -29,7 +29,7 @@
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="/list/customer">Customers</a>
+							<a href="/app/list/customer">Customers</a>
 						</li>
 					</ul>
 				</div>
@@ -79,7 +79,7 @@
 											</td>
 											<td>${job.jobTotal}</td>
 											<td>
-												<a class="btn btn-default btn-xs" href="/view/job/${job.id}">
+												<a class="btn btn-default btn-xs" href="/app/view/job/${job.id}">
 													<i class="fa fa-eye"></i>
 												</a>
 												<button data-id="${job.id}" data-customer="${job.customer.id}" class="btn btn-default btn-xs jobDel">
@@ -130,7 +130,7 @@
 			<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 			<script>
 				$('button.jobDel').click(function() {
-					$('form[id="deleteJobForm"]').attr('action', '/del/job/'+this.getAttribute('data-id'));
+					$('form[id="deleteJobForm"]').attr('action', '/app/del/job/'+this.getAttribute('data-id'));
 					$('input[id="customerId"]').attr('value', this.getAttribute('data-customer'));
 					$('div[id="deleteJobModal"]').modal();
 				});

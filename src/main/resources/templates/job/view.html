@@ -28,10 +28,10 @@
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="/list/customer">Customers</a>
+							<a href="/app/list/customer">Customers</a>
 						</li>
 						<li>
-							<a href="/list/job">All Jobs</a>
+							<a href="/app/list/job">All Jobs</a>
 						</li>
 					</ul>
 				</div>
@@ -43,7 +43,7 @@
 				<div id="customerInfoPanel" class="panel panel-default">
 					<div class="panel-heading">Job Information</div>
 					<div class="panel-body">
-						<form id="editCustomerForm" role="form" method="post" action="/edit/job/${job.id}">
+						<form id="editCustomerForm" role="form" method="post" action="/app/edit/job/${job.id}">
 							<div class="form-group">
 								<label for="po">PO</label>
 								<input type="text" id="po" name="po" class="form-control"
@@ -93,7 +93,7 @@
 		        	<div id="roomsTablePanel" class="panel panel-default">
 		        		<div class="panel-heading col-sm-12">
 							Room
-							<form role="form" method="post" action="/add/room" class="col-sm-5 pull-right">
+							<form role="form" method="post" action="/app/add/room" class="col-sm-5 pull-right">
 								<div class="input-group">
 									<input type="text" class="form-control input-sm" name="name" placeholder="Room Name"/>
     								<span class="input-group-btn">
@@ -122,7 +122,7 @@
 		        								<td>extra</td>
 												<td>${room.roomTotal}</td>
 		        								<td>
-													<a class="btn btn-default btn-xs" href="/view/room/${room.id}">
+													<a class="btn btn-default btn-xs" href="/app/view/room/${room.id}">
 														<i class="fa fa-eye"></i>
 													</a>
 													<button data-id="${room.id}" class="btn btn-default btn-xs roomDel">
@@ -174,7 +174,7 @@
 			<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 			<script>
 				$('button.roomDel').click(function() {
-					$('form[id="deleteRoomForm"]').attr('action', '/del/room/'+this.getAttribute('data-id'));
+					$('form[id="deleteRoomForm"]').attr('action', '/app/del/room/'+this.getAttribute('data-id'));
 					$('div[id="deleteRoomModal"]').modal();
 				});
 			</script>

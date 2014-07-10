@@ -29,10 +29,10 @@
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="/list/customer">All Customers</a>
+							<a href="app/list/customer">All Customers</a>
 						</li>
 						<li>
-							<a href="/list/job">All Jobs</a>
+							<a href="app/list/job">All Jobs</a>
 						</li>
 					</ul>
 				</div>
@@ -44,7 +44,7 @@
 		        <div id="addCustomerFormPanel" class="panel panel-default">
 		        	<div class="panel-heading">Add Customer</div>
 		        	<div class="panel-body">
-		        		<form id="addCustomer" role="form" method="post" action="/add/customer">
+		        		<form id="addCustomer" role="form" method="post" action="/app/add/customer">
 		        		    <div class="form-group">
 		        		        <input type="text" id="company" name="company" class="form-control"
 		        		        placeholder="Company" required="true"/>
@@ -59,7 +59,7 @@
 		        		    </div>
 		        		    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		        		    <button class="btn btn-md btn-primary btn-block" type="submit">Add Customer</button>
-							<a href="/list/customer" id="cancel" class="btn btn-default btn-block">Cancel</a>
+							<a href="/app/list/customer" id="cancel" class="btn btn-default btn-block">Cancel</a>
 		        		</form>
 		        	</div>
 		        </div>
