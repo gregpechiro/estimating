@@ -86,15 +86,17 @@
 										<td>${item.cost}</td>
                                         <td>${item.price}</td>
 										<td class="col-sm-2">
-											<form id="addItemForm" role="form" method="post" action="/add/room/item/${item.id}">
+											<form id="addItemForm" role="form" method="post" action="/app/add/lineItem">
 											    <div class="input-group">
-											        <input type="text" id="quantity" name="quantity" class="form-control"
+											        <input type="text" id="qty" name="qty" class="form-control"
 											        placeholder="Quantity" required="true"/>
 													<span class="input-group-btn">
 														<button class="btn btn-md btn-success" type="submit">Add</button>
 													</span>
 											    </div>
 											    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+												<input type="hidden" name="itemId" id="itemId" value="${item.id}">
+												<input type="hidden" name="roomId" id="roomId" value="${roomId}">
 											</form>
 										</td>
 									</tr>

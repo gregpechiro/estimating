@@ -25,7 +25,12 @@ public class LineItem {
     public LineItem() {
     }
 
-    public String toString() {
+	public LineItem(Item item, Integer quantity) {
+		this.item = item;
+		this.quantity = quantity;
+	}
+
+	public String toString() {
         return "Id: " + id + ", Entity: LineItem";
     }
 

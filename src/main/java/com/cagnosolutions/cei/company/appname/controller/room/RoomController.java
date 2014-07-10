@@ -5,7 +5,9 @@ package com.cagnosolutions.cei.company.appname.controller.room;
  */
 
 import com.cagnosolutions.cei.company.appname.domain.Job;
+import com.cagnosolutions.cei.company.appname.domain.LineItem;
 import com.cagnosolutions.cei.company.appname.domain.Room;
+import com.cagnosolutions.cei.company.appname.service.ItemService;
 import com.cagnosolutions.cei.company.appname.service.JobService;
 import com.cagnosolutions.cei.company.appname.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class RoomController {
 
 	@Autowired
 	private JobService jobService;
+
+	@Autowired
+	private ItemService itemService;
 
     // add post
     @RequestMapping(value = "/add/room", method = RequestMethod.POST)
@@ -62,4 +67,16 @@ public class RoomController {
   		roomService.update(existingRoom);
         return "redirect:/app/view/room/" + id;
     }
+
+	@RequestMapping(value="/add/item/room", method = RequestMethod.POST)
+	public String addLineItem(@RequestParam(value="roomId") Long roomId, @RequestParam(value="itemId") Long itemId, @RequestParam(value="qty") Integer qty) {
+		Room room = roomService.findById(roomId);
+		Collection<LineItem> lineItems = room.getItems();
+		lineItems.add(new LineItem(itemService.findById(itemId), qty));
+		room.setItems(lineItems);
+		roomService.update(room);
+		return "redirect:/app/list/item/" + roomId;
+	}
+
+
 }

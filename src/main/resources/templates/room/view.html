@@ -67,19 +67,84 @@
 				</div>
 				<div class="row">
 		        	<div id="itemsTablePanel" class="panel panel-default">
-		        		<div class="panel-heading">Items</div>
+		        		<div class="panel-heading col-sm-12">
+							Items
+							<a href="/app/list/item/${room.id}" id="addItem" class="btn btn-default btn-sm pull-right">Add Item</a>
+						</div>
 		        		<div class="panel-body">
-
+							<div id="itemTableDiv" class="table-responsive">
+								 <table class="table table-striped">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Description</th>
+											<th>Category</th>
+											<th>Quantity</th>
+											<th>Price</th>
+										</tr>
+									</thead>
+									<tbody>
+										<#list room.items as lineItem>
+											<tr>
+												<td>${lineItem.item.name}</td>
+												<td>${lineItem.item.description}</td>
+												<td>${lineItem.item.category}</td>
+												<td>${lineItem.quantity}</td>
+												<td>${lineItem.item.price}</td>
+												<td>
+													<button data-id="${lineItem.id}" class="btn btn-default btn-xs itemDel">
+														<i class="fa fa-trash-o"></i>
+													</button>
+												</td>
+											</tr>
+										</#list>
+									</tbody>
+								</table>
+							</div>
 		        		</div>
 		        	</div>
 				</div>
 		    </div>
 		</div>
 
+		<div class="modal fade" id="deleteItemModal" tabindex="-1" role="dialog" aria-labelledby=""  aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span>
+							<span class="sr-only">Close</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Delete Customer</h4>
+					</div>
+					<div class="modal-body text-center">
+						<p>Deleting this item will permanently remove it from the room.</p>
+						<p>Are you sure you would like to delete?</p>
+						<form id="deleteItemForm" method="post">
+							<a class="btn btn-success"  data-dismiss="modal">
+								No
+							</a>
+							<input type="hidden" id="roomId" name="room" value="${room.id}"/>
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							<button class="btn btn-danger" type="submit">
+								Yes
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!-- scripts -->
 		<div id="scripts">
 			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-			<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>		
+			<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+			<script>
+				$('button.itemDel').click(function() {
+					$('form[id="deleteItemForm"]').attr('action', '/app/del/lineItem/'+this.getAttribute('data-id'));
+					$('div[id="deleteItemModal"]').modal();
+				});
+			</script>
 		</div>
 	</body>
 </html>

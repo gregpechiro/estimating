@@ -22,14 +22,15 @@ public class ItemController {
     private ItemService itemService;
 
     // list get
-	@RequestMapping(value = "/list/item", method = RequestMethod.GET)
-	public String list(Model model, @RequestParam(value = "category", required = false) String category, @RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order) {
+	@RequestMapping(value = "/list/item/{roomId}", method = RequestMethod.GET)
+	public String list(Model model, @RequestParam(value = "category", required = false) String category, @RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order, @PathVariable(value="roomId") Long roomId) {
 		if(category == null) {
 			model.addAttribute("items", itemService.findAllSorted(sort, order));
 		} else {
 			model.addAttribute("items", itemService.findAllByCategory(category));
 		}
 		model.addAttribute("categories", itemService.getUniqueItemsByCategory());
+		model.addAttribute("roomId", roomId);
 		return "item/list";
 	}
 
