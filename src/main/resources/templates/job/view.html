@@ -122,16 +122,12 @@
 		        								<td>extra</td>
 												<td>${room.roomTotal}</td>
 		        								<td>
-													<form method="post" action="/del/room/${room.id}">
-														<a class="btn btn-default btn-xs" href="/view/room/${room.id}">
-															<i class="fa fa-eye"></i>
-														</a>
-														<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-														<input type="hidden" id="jobId" name="jobId" value="${job.id}"/>
-														<button class="btn btn-default btn-xs" type="submit">
-															<i class="fa fa-trash-o"></i>
-														</button>
-													</form>
+													<a class="btn btn-default btn-xs" href="/view/room/${room.id}">
+														<i class="fa fa-eye"></i>
+													</a>
+													<button data-id="${room.id}" class="btn btn-default btn-xs roomDel">
+														<i class="fa fa-trash-o"></i>
+													</button>
 		        								</td>
 		        							</tr>
 										</#list>
@@ -144,10 +140,44 @@
 		    </div>
 		</div>
 
+		<div class="modal fade" id="deleteRoomModal" tabindex="-1" role="dialog" aria-labelledby=""  aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span>
+							<span class="sr-only">Close</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Delete Customer</h4>
+					</div>
+					<div class="modal-body text-center">
+						<p>Deleting this room will permanently remove it and all of it's items.</p>
+						<p>Are you sure you would like to delete?</p>
+						<form id="deleteRoomForm" method="post">
+							<a class="btn btn-success"  data-dismiss="modal">
+								No
+							</a>
+							<input type="hidden" id="jobId" name="jobId" value="${job.id}"/>
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							<button class="btn btn-danger" type="submit">
+								Yes
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!-- scripts -->
 		<div id="scripts">
 			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-			<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>		
+			<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+			<script>
+				$('button.roomDel').click(function() {
+					$('form[id="deleteRoomForm"]').attr('action', '/del/room/'+this.getAttribute('data-id'));
+					$('div[id="deleteRoomModal"]').modal();
+				});
+			</script>
 		</div>
 	</body>
 </html>

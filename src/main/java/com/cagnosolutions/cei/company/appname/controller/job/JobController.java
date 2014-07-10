@@ -59,7 +59,7 @@ public class JobController {
     @RequestMapping(value = "/del/job/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable("id") Long id, Model model,  @RequestParam(value="customerId") Long customerId) {
         jobService.delete(jobService.findById(id));
-        return "redirect:/list/customer/" + customerId;
+        return "redirect:/view/customer/" + customerId;
     }
 
     // edit post
