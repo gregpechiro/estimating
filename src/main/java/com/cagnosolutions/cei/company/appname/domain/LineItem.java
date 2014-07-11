@@ -74,11 +74,11 @@ public class LineItem {
 		this.room = room;
 	}
 
-	public Double getTotal() {
+	public Double getLineItemTotal() {
 		return lineItemTotal;
 	}
 
-	public void setTotal() {
+	public void setLineItemTotal() {
 		this.lineItemTotal = item.getPrice() * quantity;
 	}
 

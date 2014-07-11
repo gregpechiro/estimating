@@ -6,6 +6,7 @@ package com.cagnosolutions.cei.company.appname.controller.customer;
 
 import com.cagnosolutions.cei.company.appname.domain.Customer;
 import com.cagnosolutions.cei.company.appname.service.CustomerService;
+import com.cagnosolutions.cei.company.appname.service.SettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +22,14 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+	@Autowired
+	private SettingsService settingsService;
+
     // list get
     @RequestMapping(value = "/list/customer", method = RequestMethod.GET)
     public String list(Model model, @RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order) {
         model.addAttribute("customers", customerService.findAllSorted(sort, order));
+		model.addAttribute("settings", settingsService.findById(1L));
         return "customer/list";
     }
 

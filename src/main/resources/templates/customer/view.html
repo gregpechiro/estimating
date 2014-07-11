@@ -81,56 +81,52 @@
 								</div>
 							</form>
 						</div>
-			    		<div class="panel-body">
-			    			<div id="customerJobsTable" class="table-responsive">
-			    				 <table class="table table-striped">
-			    					<thead>
-			    						<tr>
-			    							<th>Job Number</th>
-											<th>PO</th>
-			    							<th>Rooms</th>
-											<th>Status</th>
-			    							<th>Total</th>
-			    							<th>Options</th>
-			    						</tr>
-			    					</thead>
-			    					<tbody>
-			    						<#list customer.jobs as job>
-											<tr>
-												<td>${job.id}</td>
-												<td>${job.po}</td>
-												<td>${job.getRoomCount()}</td>
-												<td>
-													<#switch job.status>
-														<#case 1>
-															Quote
-															<#break>
-														<#case 2>
-															Active
-															<#break>
-														<#case 3>
-															Billed
-															<#break>
-														<#case 4>
-															<span class="text-success">Paid</span>
-															<#break>
-													</#switch>
-												</td>
-												<td>${job.jobTotal}</td>
-												<td>
-													<a class="btn btn-default btn-xs" href="/app/view/job/${job.id}">
-														<i class="fa fa-eye"></i>
-													</a>
-													<button data-id="${job.id}" data-customer="${job.customer.id}" class="btn btn-default btn-xs jobDel">
-														<i class="fa fa-trash-o"></i>
-													</button>
-												</td>
-											</tr>
-			    						</#list>
-			    					</tbody>
-			    				</table>
-			    			</div>
-			    		</div>
+			    		 <table class="table table-striped table-bordered">
+			    			<thead>
+			    				<tr>
+			    					<th class="text-center">Job Number</th>
+									<th class="text-center">PO</th>
+			    					<th class="text-center">Rooms</th>
+									<th class="text-center">Status</th>
+			    					<th class="text-center">Job Total</th>
+			    					<th class="text-center">Options</th>
+			    				</tr>
+			    			</thead>
+			    			<tbody>
+			    				<#list customer.jobs as job>
+									<tr>
+										<td class="text-center">${job.id}</td>
+										<td class="text-center">${job.po}</td>
+										<td class="text-center">${job.getRoomCount()}</td>
+										<td class="text-center">
+											<#switch job.status>
+												<#case 1>
+													Quote
+													<#break>
+												<#case 2>
+													Active
+													<#break>
+												<#case 3>
+													Billed
+													<#break>
+												<#case 4>
+													<span class="text-success">Paid</span>
+													<#break>
+											</#switch>
+										</td>
+										<td class="text-right">$${job.jobTotal}</td>
+										<td class="text-center">
+											<a class="btn btn-default btn-xs" href="/app/view/job/${job.id}">
+												<i class="fa fa-eye"></i>
+											</a>
+											<button data-id="${job.id}" data-customer="${job.customer.id}" class="btn btn-default btn-xs jobDel">
+												<i class="fa fa-trash-o"></i>
+											</button>
+										</td>
+									</tr>
+			    				</#list>
+			    			</tbody>
+			    		</table>
 			    	</div>
 				</div>
 			</div>

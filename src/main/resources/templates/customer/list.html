@@ -37,7 +37,10 @@
 		</div>
 
 		<div id="content" class="container">
-		    <div id="customerTableDiv" class="col-sm-offset-2 col-sm-8">
+			<div id="logo" class="col-sm-4" >
+			    <img src="${(settings.company.logo)!}">
+			</div>
+		    <div id="customerTableDiv" class="col-sm-8">
 		        <div id="customerTablePanel" class="panel panel-default">
 		        	<div class="panel-heading col-sm-12">
 						Customers
@@ -48,11 +51,11 @@
 		        			 <table class="table table-striped">
 		        				<thead>
 		        					<tr>
-		        						<th>Company</th>
-		        						<th>Contact</th>
-		        						<th>Email</th>
-										<th>Jobs</th>
-		        						<th>Options</th>
+		        						<th class="text-center">Company</th>
+		        						<th class="text-center">Contact</th>
+		        						<th class="text-center">Email</th>
+										<th class="text-center">Jobs</th>
+		        						<th class="text-center">Options</th>
 		        					</tr>
 		        				</thead>
 		        				<tbody>

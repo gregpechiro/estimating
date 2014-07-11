@@ -29,6 +29,7 @@ public class Room {
 
     private double roomTotal;
     private int labor;
+	private Double laborTotal;
 
     public Room() {
     }
@@ -90,8 +91,15 @@ public class Room {
         return roomTotal;
     }
 
-    public void setRoomTotal(double roomTotal) {
-        this.roomTotal = roomTotal;
+    public void setRoomTotal(Double hourlyRate) {
+		Double total = 0.0;
+		for (LineItem next : items) {
+			next.setLineItemTotal();
+			total = total + next.getLineItemTotal();
+		}
+		setLaborTotal(hourlyRate);
+		total = total + laborTotal;
+		this.roomTotal = total;
     }
 
     public int getLabor() {
@@ -101,4 +109,12 @@ public class Room {
     public void setLabor(int labor) {
         this.labor = labor;
     }
+
+	public Double getLaborTotal() {
+		return laborTotal;
+	}
+
+	public void setLaborTotal(Double hourlyRate) {
+		this.laborTotal = labor * hourlyRate;
+	}
 }

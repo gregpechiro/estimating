@@ -9,6 +9,7 @@ import com.cagnosolutions.cei.company.appname.domain.Room;
 import com.cagnosolutions.cei.company.appname.service.ItemService;
 import com.cagnosolutions.cei.company.appname.service.JobService;
 import com.cagnosolutions.cei.company.appname.service.RoomService;
+import com.cagnosolutions.cei.company.appname.service.SettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,9 @@ public class RoomController {
 
 	@Autowired
 	private ItemService itemService;
+
+	@Autowired
+	private SettingsService settingsService;
 
     // add post
     @RequestMapping(value = "/add/room", method = RequestMethod.POST)
@@ -58,6 +62,7 @@ public class RoomController {
 			e.printStackTrace();
 		}
 		model.addAttribute("items", items);*/
+		model.addAttribute("rate", settingsService.findById(1L).getHourlyRate());
 		model.addAttribute("room", room);
         return "room/view";
     }
@@ -75,7 +80,9 @@ public class RoomController {
 		Room existingRoom = roomService.findById(id);
 		existingRoom.setName(room.getName());
 		existingRoom.setNotes(room.getNotes());
-  		roomService.update(existingRoom);
+		existingRoom.setLabor(room.getLabor());
+  		existingRoom.getJob().setJobTotal(settingsService.findById(1L).getHourlyRate());
+		jobService.update(existingRoom.getJob());
         return "redirect:/app/view/room/" + id;
     }
 }

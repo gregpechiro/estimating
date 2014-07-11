@@ -45,13 +45,18 @@
 					<div class="panel-body">
 						<form id="editCustomerForm" role="form" method="post" action="/app/edit/room/${room.id}">
 							<div class="form-group">
-								<label for="company">Name</label>
+								<label for="name">Name</label>
 								<input type="text" id="name" name="name" class="form-control"
 									   placeholder="Name" required="true" value="${room.name}"/>
 							</div>
 							<div class="form-group">
-								<label for="contact">Notes</label>
+								<label for="notes">Notes</label>
 								<textarea type="text" id="notes" rows="6" style="resize:none;" name="notes" class="form-control"cplaceholder="Notes">${(room.notes)!}</textarea>
+							</div>
+							<div class="form-group">
+								<label for="labor">Labor</label>
+								<input type="text" id="labor" name="labor" class="form-control"
+									   placeholder="Labor" required="true" value="${(room.labor)!}"/>
 							</div>
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 							<button class="btn btn-md btn-primary btn-block" type="submit">Save</button>
@@ -71,39 +76,48 @@
 							Items
 							<a href="/app/list/item/${room.id}" id="addItem" class="btn btn-default btn-sm pull-right">Add Item</a>
 						</div>
-		        		<div class="panel-body">
-							<div id="itemTableDiv" class="table-responsive">
-								 <table class="table table-striped">
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th>Description</th>
-											<th>Category</th>
-											<th>Item Price</th>
-											<th>Quantity</th>
-											<th></th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
-										<#list room.items as lineItem>
-											<tr>
-												<td>${lineItem.item.name}</td>
-												<td>${lineItem.item.description}</td>
-												<td>${lineItem.item.category}</td>
-												<td>${lineItem.item.price}</td>
-												<td>${lineItem.quantity}</td>
-												<td>
-													<button data-id="${lineItem.id}" class="btn btn-default btn-xs itemDel">
-														<i class="fa fa-trash-o"></i>
-													</button>
-												</td>
-											</tr>
-										</#list>
-									</tbody>
-								</table>
-							</div>
-		        		</div>
+						 <table class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<th class="text-center">Name</th>
+									<th class="text-center">Description</th>
+									<th class="text-center">Category</th>
+									<th class="text-center">Item Price</th>
+									<th class="text-center">Quantity</th>
+									<th class="text-center">Line Price</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<#list room.items as lineItem>
+									<tr>
+										<td class="text-center">${lineItem.item.name}</td>
+										<td class="text-center">${lineItem.item.description}</td>
+										<td class="text-center">${lineItem.item.category}</td>
+										<td class="text-right">$${lineItem.item.price}</td>
+										<td class="text-right">${lineItem.quantity}</td>
+										<td class="text-right">$${lineItem.lineItemTotal}</td>
+										<td class="text-center">
+											<button data-id="${lineItem.id}" class="btn btn-default btn-xs itemDel">
+												<i class="fa fa-trash-o"></i>
+											</button>
+										</td>
+									</tr>
+								</#list>
+								<tr>
+									<td class="text-center">Labor</td>
+									<td colspan="2"></td>
+									<td class="text-right">$${rate}</td>
+									<td class="text-right">${room.labor}</td>
+									<td class="text-right">$${(room.laborTotal)!}</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td colspan="6" class="text-right">Room Total: $${room.roomTotal}</td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
 		        	</div>
 				</div>
 		    </div>

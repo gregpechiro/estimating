@@ -98,8 +98,13 @@ public class Job {
         return jobTotal;
     }
 
-    public void setJobTotal(double jobTotal) {
-        this.jobTotal = jobTotal;
+    public void setJobTotal(Double hourlyRate) {
+		Double total = 0.0;
+        for (Room next : rooms) {
+			next.setRoomTotal(hourlyRate);
+			total = total + next.getRoomTotal();
+		}
+		this.jobTotal = total;
     }
 
 	public Short getStatus() {
