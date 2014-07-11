@@ -17,20 +17,14 @@ public class Settings {
     private Long id;
     private Double hourlyRate;
 
+    @Lob
+    private Byte[] logo;
+
     @Embedded
     private Company company;
 
     public Settings() {
 
-    }
-
-    @Override
-    public String toString() {
-        return "Settings{" +
-                "id=" + id +
-                ", hourlyRate=" + hourlyRate +
-                ", company=" + company.toString() +
-                '}';
     }
 
     public Long getId() {

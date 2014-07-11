@@ -13,7 +13,9 @@
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>		
 		<link href="http://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css"/>
 		<link href="/static/css/custom.css" rel="stylesheet" type="text/css"/>
-
+        <style>
+            input.uploader{position:absolute;left: -9999px;}label.uploader{cursor: pointer;}
+        </style>
 	</head>
 
 	<body id="body">
@@ -47,7 +49,16 @@
             ${(msg)! ""}
             <div class="col-sm-4">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Settings</div>
+                    <div class="panel-heading text-center">
+                        <form id="uploader" role="form" method="post" action="/admin/upload/logo" enctype="multipart/form-data">
+                            <div class="btn-group">
+                                <label class="btn btn-sm btn-default uploader" for="logo">Select File To Upload (Your Logo)</label>
+                                <button id="uploader" class="btn btn-sm btn-primary" type="submit" disabled="true">Upload Logo</button>
+                            </div>
+                            <input type="file" id="logo" name="logo" class="uploader" required="true"/>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
+                    </div>
                     <div class="panel-body">
                         <form id="pricing" role="form" method="post" action="/admin/edit/settings">
 
@@ -69,11 +80,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="street">Address</label>
-                                <textarea id="street" name="company.street" class="form-control" rows="3"
-                                              placeholder="Full Address" required="true" style="resize: none;">
-                                        ${(settings.company.address)!''}
-                                </textarea>
+                                <label for="address">Full Address</label>
+                                <textarea id="address" name="company.address" class="form-control" rows="3" required="true" style="resize: none;">${(settings.company.address)!''}</textarea>
                             </div>
 
                             <div class="form-group">
@@ -106,11 +114,11 @@
                             <ul class="dropdown-menu" role="menu" aria-labelledby="categoryFilter">
                                 <#list categories as category>
                                     <li role="presentation">
-                                        <a role="menuitem" tabindex="-1" href="/admin/list/item?category=${category}">${category}</a>
+                                        <a role="menuitem" tabindex="-1" href="/admin?category=${category}">${category}</a>
                                     </li>
                                 </#list>
                                 <li role="presentation" class="divider"></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="/admin/list/item">All Items</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="/admin">All Items</a></li>
                             </ul>
                         </div>
                 	</div>
@@ -138,14 +146,11 @@
                                         <td>${item.cost}</td>
                                         <td>${item.price}</td>
                                         <td>
-                                            <span class="text-right">
-                                                <a class="btn btn-default btn-xs" href="/admin/view/item/${item.id}">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
+                                            <span class="pull-right">
                                                 <a class="btn btn-default btn-xs" href="/admin/edit/item/${item.id}">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                <button data-id="${item.id}" class="btn btn-default btn-xs" type="submit"><i class="fa fa-trash-o"></i></button>
+                                                <button data-id="${item.id}" class="btn btn-default btn-xs itemDel" type="submit"><i class="fa fa-trash-o"></i></button>
                                             </span>
                                         </td>
                                     </tr>
@@ -172,14 +177,9 @@
                         <p>Deleting this item will permanently remove it.</p>
                         <p>Are you sure you would like to delete?</p>
                         <form id="deleteItemForm" method="post">
-                            <a class="btn btn-success"  data-dismiss="modal">
-                                No
-                            </a>
-                            <input type="hidden" id="itemId" name="jobId" value="${item.id}"/>
+                            <a class="btn btn-success"  data-dismiss="modal">No</a>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            <button class="btn btn-danger" type="submit">
-                                Yes
-                            </button>
+                            <button class="btn btn-danger" type="submit">Yes</button>
                         </form>
                     </div>
                 </div>
@@ -195,10 +195,35 @@
 			<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 			<script src="/static/js/custom.js"></script>
             <script>
-                $('button.roomDel').click(function() {
+                $('button.itemDel').click(function() {
                     $('form[id="deleteItemForm"]').attr('action', '/admin/del/item/' + this.getAttribute('data-id'));
                     $('div[id="deleteItemModal"]').modal();
                 });
+
+                function updateFileInfo() {
+                    var filepath = this.value;
+                    var m = filepath.match(/([^\/\\]+)$/);
+                    var filename = m[1];
+                    $('label[for^="' + this.id + '"]').text(filename);
+                    var inputs = $('form[id="uploader"] input');
+                    var file = true;
+                    for (var i = 0; i < 2; i++) {
+                        if (inputs[i].value === "") {
+                            file = false;
+                        }
+                    }
+                    if (file) {
+                        $('button[id="uploader"]').removeAttr('disabled')
+                    }
+                }
+
+                function addEventListenerBySelector(selector, event, fn) {
+                    var list = $(selector);
+                    list.bind(event, fn)
+                }
+
+                // add event listener on change of the file input
+                addEventListenerBySelector('input.uploader', 'change', updateFileInfo);
             </script>
         </div>
 

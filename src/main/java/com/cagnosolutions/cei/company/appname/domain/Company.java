@@ -18,7 +18,6 @@ public class Company {
     public Company() {
     }
 
-
     public String getName() {
         return name;
     }
@@ -50,6 +49,5 @@ public class Company {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
 
 }

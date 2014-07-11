@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller("adminHomeController")
@@ -46,18 +47,6 @@ public class HomeController {
         settingsService.update(settings);
         flashService.flash(attr, "update.success");
         return "redirect:/admin";
-    }
-
-    // list get
-    @RequestMapping(value = "/list/item", method = RequestMethod.GET)
-    public String list(Model model, @RequestParam(value = "category", required = false) String category, @RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order) {
-        if(category == null) {
-            model.addAttribute("items", itemService.findAllSorted(sort, order));
-        } else {
-            model.addAttribute("items", itemService.findAllByCategory(category));
-        }
-        model.addAttribute("categories", itemService.getUniqueItemsByCategory());
-        return "admin/item/list";
     }
 
     // add get
@@ -104,5 +93,23 @@ public class HomeController {
         itemService.update(item);
         flashService.flash(attr, "update.success");
         return "redirect:/admin/edit/item/" + id;
+    }
+
+    @RequestMapping(value = "/upload/logo", method = RequestMethod.POST)
+    public String uploadLogo(@RequestParam(value="logo") MultipartFile logo, RedirectAttributes attr) {
+        if (!logo.isEmpty()) {
+            try {
+                byte[] rawLogo = logo.getBytes();
+                Settings settings = settingsService.findById(1L);
+                settings.getCompany().setLogo(rawLogo);
+                settingsService.update(settings);
+                flashService.flashAlert(attr, "Logo successfully uploaded", "success", true);
+            } catch (Exception ex) {
+                flashService.flashAlert(attr, "Failed to upload '" + logo.getOriginalFilename() + ".'", "danger", true);
+            }
+        } else {
+            flashService.flashAlert(attr, "Failed to upload '" + logo.getOriginalFilename() + ".' It appears the file is empty.", "danger", true);
+        }
+        return "redirect:/admin";
     }
 }
