@@ -79,8 +79,10 @@
 											<th>Name</th>
 											<th>Description</th>
 											<th>Category</th>
+											<th>Item Price</th>
 											<th>Quantity</th>
-											<th>Price</th>
+											<th></th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -89,8 +91,8 @@
 												<td>${lineItem.item.name}</td>
 												<td>${lineItem.item.description}</td>
 												<td>${lineItem.item.category}</td>
-												<td>${lineItem.quantity}</td>
 												<td>${lineItem.item.price}</td>
+												<td>${lineItem.quantity}</td>
 												<td>
 													<button data-id="${lineItem.id}" class="btn btn-default btn-xs itemDel">
 														<i class="fa fa-trash-o"></i>
@@ -124,7 +126,7 @@
 							<a class="btn btn-success"  data-dismiss="modal">
 								No
 							</a>
-							<input type="hidden" id="roomId" name="room" value="${room.id}"/>
+							<input type="hidden" id="roomId" name="roomId" value="${room.id}"/>
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 							<button class="btn btn-danger" type="submit">
 								Yes

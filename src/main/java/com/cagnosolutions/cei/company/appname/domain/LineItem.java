@@ -27,6 +27,8 @@ public class LineItem {
 	@JoinColumn(name="item")
 	private Item item;
 
+	private Double lineItemTotal;
+
     public LineItem() {
     }
 
@@ -70,6 +72,14 @@ public class LineItem {
 
 	public void setRoom(Room room) {
 		this.room = room;
+	}
+
+	public Double getTotal() {
+		return lineItemTotal;
+	}
+
+	public void setTotal() {
+		this.lineItemTotal = item.getPrice() * quantity;
 	}
 
 	public Item getItem() {

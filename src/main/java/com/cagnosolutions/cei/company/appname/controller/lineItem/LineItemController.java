@@ -34,7 +34,9 @@ public class LineItemController {
 		Room room = roomService.findById(roomId);
 		Collection<LineItem> lineItems = room.getItems();
 		//lineItems.add(new LineItem(itemId, qty));
-		lineItems.add(new  LineItem(itemService.findById(itemId), qty));
+		LineItem lineItem = new LineItem(itemService.findById(itemId), qty);
+		lineItem.setTotal();
+		lineItems.add(lineItem);
 		room.setItems(lineItems);
 		roomService.update(room);
 		return "redirect:/app/list/item/" + roomId;
@@ -44,6 +46,6 @@ public class LineItemController {
 	@RequestMapping(value = "/del/lineItem/{id}", method = RequestMethod.POST)
 	public String delete(@PathVariable("id") Long id, @RequestParam(value="roomId") Long roomId) {
 		lineItemService.delete(lineItemService.findById(id));
-		return "redirect:/view/room/"+roomId;
+		return "redirect:/app/view/room/"+roomId;
 	}
 }
