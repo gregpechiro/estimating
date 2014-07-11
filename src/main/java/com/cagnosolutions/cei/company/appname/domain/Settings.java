@@ -18,7 +18,15 @@ public class Settings {
     private Double hourlyRate;
 
     @Lob
-    private Byte[] logo;
+    private byte[] logo;
+
+    public byte[] getLogo() {
+        return logo;
+    }
+
+    public void setLogo(byte[] logo) {
+        this.logo = logo;
+    }
 
     @Embedded
     private Company company;

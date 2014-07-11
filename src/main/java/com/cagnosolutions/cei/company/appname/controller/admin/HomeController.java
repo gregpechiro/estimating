@@ -101,7 +101,7 @@ public class HomeController {
             try {
                 byte[] rawLogo = logo.getBytes();
                 Settings settings = settingsService.findById(1L);
-                settings.getCompany().setLogo(rawLogo);
+                settings.setLogo(rawLogo);
                 settingsService.update(settings);
                 flashService.flashAlert(attr, "Logo successfully uploaded", "success", true);
             } catch (Exception ex) {
