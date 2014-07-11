@@ -4,23 +4,14 @@ package com.cagnosolutions.cei.company.appname.controller.admin.item;
  * Copyright Cagno Solutions. All rights reserved.
  */
 
-import com.cagnosolutions.cei.company.appname.domain.Item;
-import com.cagnosolutions.cei.company.appname.service.FlashService;
-import com.cagnosolutions.cei.company.appname.service.ItemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller(value = "adminItemController")
 @RequestMapping("/admin")
 public class ItemController {
 
-    @Autowired
+    /*@Autowired
     private ItemService itemService;
 
     @Autowired
@@ -82,5 +73,5 @@ public class ItemController {
 		itemService.update(item);
     	flashService.flash(attr, "update.success");
         return "redirect:/admin/edit/item/" + id;
-    }
+    }*/
 }

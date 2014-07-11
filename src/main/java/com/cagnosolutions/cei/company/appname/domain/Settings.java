@@ -21,10 +21,16 @@ public class Settings {
     private Company company;
 
     public Settings() {
+
     }
 
+    @Override
     public String toString() {
-        return "Id: " + id + ", Entity: Settings";
+        return "Settings{" +
+                "id=" + id +
+                ", hourlyRate=" + hourlyRate +
+                ", company=" + company.toString() +
+                '}';
     }
 
     public Long getId() {

@@ -5,23 +5,19 @@ package com.cagnosolutions.cei.company.appname.domain;
  * Copyright Cagno Solutions. All rights reserved.
  */
 
-
 import javax.persistence.*;
 
 @Embeddable
 public class Company {
 
     private String name;
-    private String street;
-    private String city;
-    private String state;
-    private String zip;
+    private String address;
     private String email;
     private String phone;
-    private String owner;
 
     public Company() {
     }
+
 
     public String getName() {
         return name;
@@ -31,36 +27,12 @@ public class Company {
         this.name = name;
     }
 
-    public String getStreet() {
-        return street;
+    public String getAddress() {
+        return address;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getZip() {
-        return zip;
-    }
-
-    public void setZip(String zip) {
-        this.zip = zip;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getEmail() {
@@ -79,11 +51,5 @@ public class Company {
         this.phone = phone;
     }
 
-    public String getOwner() {
-        return owner;
-    }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
 }
