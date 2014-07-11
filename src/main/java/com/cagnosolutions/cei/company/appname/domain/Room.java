@@ -23,9 +23,10 @@ public class Room {
 	@JoinColumn(name="job")
 	private Job job;
 
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="room_item")
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="room")
     private Collection<LineItem> items = new ArrayList<>();
+
     private double roomTotal;
     private int labor;
 

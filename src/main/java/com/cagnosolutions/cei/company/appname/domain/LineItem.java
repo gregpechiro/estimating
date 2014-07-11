@@ -16,16 +16,22 @@ public class LineItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="item_id")
-    private Item item;
-
+	//private Long itemId;
     private Integer quantity;
+
+	@ManyToOne
+	@JoinColumn(name="room")
+	private Room room;
+
+	@ManyToOne
+	@JoinColumn(name="item")
+	private Item item;
 
     public LineItem() {
     }
 
 	public LineItem(Item item, Integer quantity) {
+		//this.itemId = itemId;
 		this.item = item;
 		this.quantity = quantity;
 	}
@@ -42,19 +48,35 @@ public class LineItem {
         this.id = id;
     }
 
-    public Item getItem() {
-        return item;
-    }
+	/*public Long getItemId() {
+		return itemId;
+	}
 
-    public void setItem(Item item) {
-        this.item = item;
-    }
+	public void setItemId(Long itemId) {
+		this.itemId = itemId;
+	}*/
 
-    public Integer getQuantity() {
+	public Integer getQuantity() {
         return quantity;
     }
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
 }

@@ -5,7 +5,6 @@ package com.cagnosolutions.cei.company.appname.controller.room;
  */
 
 import com.cagnosolutions.cei.company.appname.domain.Job;
-import com.cagnosolutions.cei.company.appname.domain.LineItem;
 import com.cagnosolutions.cei.company.appname.domain.Room;
 import com.cagnosolutions.cei.company.appname.service.ItemService;
 import com.cagnosolutions.cei.company.appname.service.JobService;
@@ -47,7 +46,19 @@ public class RoomController {
     // view get
     @RequestMapping(value = "/view/room/{id}", method = RequestMethod.GET)
     public String view(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("room", roomService.findById(id));
+        Room room = roomService.findById(id);
+		/*List<Map<String, Object>> items = new ArrayList<>();
+		try {
+			for (LineItem next : room.getItems()) {
+				Map<String, Object> line = itemService.findById(next.getItemId()).asMap();
+				line.put("quantity", next.getQuantity());
+				items.add(line);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("items", items);*/
+		model.addAttribute("room", room);
         return "room/view";
     }
 
@@ -67,16 +78,4 @@ public class RoomController {
   		roomService.update(existingRoom);
         return "redirect:/app/view/room/" + id;
     }
-
-	@RequestMapping(value="/add/item/room", method = RequestMethod.POST)
-	public String addLineItem(@RequestParam(value="roomId") Long roomId, @RequestParam(value="itemId") Long itemId, @RequestParam(value="qty") Integer qty) {
-		Room room = roomService.findById(roomId);
-		Collection<LineItem> lineItems = room.getItems();
-		lineItems.add(new LineItem(itemService.findById(itemId), qty));
-		room.setItems(lineItems);
-		roomService.update(room);
-		return "redirect:/app/list/item/" + roomId;
-	}
-
-
 }

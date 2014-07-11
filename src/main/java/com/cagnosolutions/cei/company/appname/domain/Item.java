@@ -6,6 +6,12 @@ package com.cagnosolutions.cei.company.appname.domain;
  */
 
 import javax.persistence.*;
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Table(name = "item")
@@ -74,5 +80,17 @@ public class Item {
     public void setPrice(double price) {
         this.price = price;
     }
+
+	public Map<String, Object> asMap() throws Exception {
+		Map<String, Object> result = new HashMap<>();
+		BeanInfo info = Introspector.getBeanInfo(Item.class);
+		for (PropertyDescriptor prop : info.getPropertyDescriptors()) {
+			Method method = prop.getReadMethod();
+			if (method != null) {
+				result.put(prop.getName(), method.invoke(this));
+			}
+		}
+		return result;
+	}
 
 }
