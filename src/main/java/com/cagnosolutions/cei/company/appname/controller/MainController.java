@@ -1,6 +1,7 @@
 package com.cagnosolutions.cei.company.appname.controller;
 
 import com.cagnosolutions.cei.company.appname.domain.User;
+import com.cagnosolutions.cei.company.appname.service.CustomerService;
 import com.cagnosolutions.cei.company.appname.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,23 +13,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.security.Principal;
-
 @Controller("mainController")
 public class MainController {
 
     @Autowired
     private UserService userService;
 
+	@Autowired
+	private CustomerService customerService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
-        return "redirect:/app/list/customer";
+        return "redirect:/app/home";
     }
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String home(Principal principal, Model model) {
-        model.addAttribute("auth", (principal == null));
-        return "home";
+
+	// all customers view
+    @RequestMapping(value = "/app/home", method = RequestMethod.GET)
+    public String home(Model model) {
+		model.addAttribute("customers", customerService.findAll());
+        return "test/home";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)

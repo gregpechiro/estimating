@@ -5,13 +5,17 @@ package com.cagnosolutions.cei.company.appname.service;
  */
 
 import com.cagnosolutions.cei.company.appname.domain.Job;
+import com.cagnosolutions.cei.company.appname.domain.Room;
 import com.cagnosolutions.cei.company.appname.repository.JobRepository;
+import com.cagnosolutions.cei.company.appname.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Transactional
 @Service("jobService")
@@ -19,6 +23,9 @@ public class JobService {
 
     @Autowired
     private JobRepository dao;
+
+	@Autowired
+	private RoomRepository roomDao;
 
     public Job insert(Job job) {
         return dao.saveAndFlush(job);
@@ -56,4 +63,27 @@ public class JobService {
         return (string == null || string.equals(""));
     }
 
+
+	public void addRoomToJob(Long jobId, Room room) {
+		roomDao.save(room);
+		Job job = dao.findOne(jobId);
+		job.addRoom(room);
+		dao.save(job);
+	}
+
+	public Map<String, String> getHtml(Long customerId, Long jobId) {
+		Map<String, String> map = new HashMap<>();
+		map.put("url", String.format("/app/customer/%d/job/%d", customerId, jobId));
+		map.put("breadcrumb", String.format(
+			"<ol class=\"breadcrumb\">"+
+				"<li><a href=\"/\">Customers</a></li>"+
+				"<li><a href=\"/app/customer/%d\">Customer #%d</a></li>"+
+				"<li class=\"active\">Job #%d</li>"+
+			"</ol>",
+			customerId, customerId,
+			jobId
+			)
+		);
+		return map;
+	}
 }

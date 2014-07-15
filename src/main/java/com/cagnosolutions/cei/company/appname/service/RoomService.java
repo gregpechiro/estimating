@@ -55,5 +55,4 @@ public class RoomService {
     private static boolean isEmpty(String string) {
         return (string == null || string.equals(""));
     }
-
 }

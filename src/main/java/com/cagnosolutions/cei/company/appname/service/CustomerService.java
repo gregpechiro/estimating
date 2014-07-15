@@ -5,7 +5,9 @@ package com.cagnosolutions.cei.company.appname.service;
  */
 
 import com.cagnosolutions.cei.company.appname.domain.Customer;
+import com.cagnosolutions.cei.company.appname.domain.Job;
 import com.cagnosolutions.cei.company.appname.repository.CustomerRepository;
+import com.cagnosolutions.cei.company.appname.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ public class CustomerService {
 
     @Autowired
     private CustomerRepository dao;
+
+	@Autowired
+	private JobRepository jobDao;
 
     public Customer insert(Customer customer) {
         return dao.saveAndFlush(customer);
@@ -56,4 +61,10 @@ public class CustomerService {
         return (string == null || string.equals(""));
     }
 
+	public void addJobToCustomer(Long customerId, Job job) {
+		jobDao.save(job);
+		Customer customer = dao.findOne(customerId);
+		customer.addJob(job);
+		dao.save(customer);
+	}
 }

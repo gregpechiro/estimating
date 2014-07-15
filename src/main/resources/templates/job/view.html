@@ -63,15 +63,15 @@
 								<#switch job.status>
 									<#case 1>
 										<span class="lead">Quote</span>
-										<a href="/next/status/${job.id}" class="btn btn-default pull-right">Change to Active</a>
+										<a href="/app/next/status/${job.id}" class="btn btn-default pull-right">Change to Active</a>
 										<#break>
 									<#case 2>
 										<span class="lead">Active</span>
-										<a href="/next/status/${job.id}" class="btn btn-default pull-right">Change to Billed</a>
+										<a href="/app/next/status/${job.id}" class="btn btn-default pull-right">Change to Billed</a>
 										<#break>
 									<#case 3>
 										<span class="lead">Billed</span>
-										<a href="/next/status/${job.id}" class="btn btn-default pull-right">Change to Paid</a>
+										<a href="/app/next/status/${job.id}" class="btn btn-default pull-right">Change to Paid</a>
 										<#break>
 									<#case 4>
 										<span class="lead text-success">Paid</span>

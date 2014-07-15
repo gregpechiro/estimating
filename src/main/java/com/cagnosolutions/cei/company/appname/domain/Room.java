@@ -1,13 +1,9 @@
 package com.cagnosolutions.cei.company.appname.domain;
 
-/**
- * Created by Scott Cagno on 7/7/14.
- * Copyright Cagno Solutions. All rights reserved.
- */
+import javax.persistence.GeneratedValue;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "room")
@@ -16,35 +12,15 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String name;
-    private String notes;
+	private String breadcrumb;
 
-	@ManyToOne
-	@JoinColumn(name="job")
-	private Job job;
-
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="room")
-    private Collection<LineItem> items = new ArrayList<>();
-
-    private double roomTotal;
-    private int labor;
-	private Double laborTotal;
+	@OneToMany(cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "room_id")
+	private Set<LineItem> lineItems;
 
     public Room() {
-    }
-
-    public String toString() {
-        return String.format(
-            "<ol class=\"breadcrumb\">" +
-				"<li><a href=\"/app/list/customer\">Customers</a></li>"+
-                "<li><a href=\"/app/view/customer/%d\">%s</a></li>" +
-                "<li><a href=\"/app/view/job/%d\">Job %d</a></li>" +
-                "<li class=\"active\">%s</li>" +
-            "</ol>",
-            job.getCustomer().getId(), job.getCustomer().getCompany(),
-            job.getId(), job.getId(),
-            name);
     }
 
     public Long getId() {
@@ -63,58 +39,19 @@ public class Room {
         this.name = name;
     }
 
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public Job getJob() {
-		return job;
+	public Set<LineItem> getLineItems() {
+		return lineItems;
 	}
 
-	public void setJob(Job job) {
-		this.job = job;
+	public void setLineItems(Set<LineItem> lineItems) {
+		this.lineItems = lineItems;
 	}
 
-	public Collection<LineItem> getItems() {
-        return items;
-    }
-
-    public void setItems(Collection<LineItem> items) {
-        this.items = items;
-    }
-
-    public double getRoomTotal() {
-        return roomTotal;
-    }
-
-    public void setRoomTotal(Double hourlyRate) {
-		Double total = 0.0;
-		for (LineItem next : items) {
-			next.setLineItemTotal();
-			total = total + next.getLineItemTotal();
-		}
-		setLaborTotal(hourlyRate);
-		total = total + laborTotal;
-		this.roomTotal = total;
-    }
-
-    public int getLabor() {
-        return labor;
-    }
-
-    public void setLabor(int labor) {
-        this.labor = labor;
-    }
-
-	public Double getLaborTotal() {
-		return laborTotal;
+	public String getBreadcrumb() {
+		return breadcrumb;
 	}
 
-	public void setLaborTotal(Double hourlyRate) {
-		this.laborTotal = labor * hourlyRate;
+	public void setBreadcrumb(String breadcrumb) {
+		this.breadcrumb = breadcrumb;
 	}
 }
