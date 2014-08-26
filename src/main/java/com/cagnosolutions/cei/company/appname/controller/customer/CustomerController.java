@@ -37,7 +37,6 @@ public class CustomerController {
     @RequestMapping(value = "/{customerId}", method = RequestMethod.POST)
 	@ResponseBody
     public String delete(@RequestParam(value = "action") String action) {
-
         return "";
     }
 }

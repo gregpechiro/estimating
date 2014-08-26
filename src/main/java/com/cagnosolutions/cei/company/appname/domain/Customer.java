@@ -20,6 +20,10 @@ public class Customer {
     public Customer() {
     }
 
+	public String toString() {
+		return "Customer #" + id + "'s name is " + name;
+	}
+
     public Long getId() {
         return id;
     }
